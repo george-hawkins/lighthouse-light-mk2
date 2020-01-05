@@ -13,3 +13,4 @@ The 100k&ohm; resistors 0603 1/10 Watt SMD resistors while the 3&ohm; and 1.75&o
 
 * [Sparkfun 1/4 Watt resistor kit](https://www.sparkfun.com/products/10969)
 
+* [Adafruit transistors 101](https://learn.adafruit.com/transistors-101?view=all) - see FETs section and "How do I pick a transistor for the job?" section and "Driving a LED Strip" example.
