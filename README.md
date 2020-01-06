@@ -14,5 +14,6 @@ The 100k&ohm; resistors 0603 1/10 Watt SMD resistors while the 3&ohm; and 1.75&o
 * [Sparkfun 1/4 Watt resistor kit](https://www.sparkfun.com/products/10969)
 
 * [Adafruit transistors 101](https://learn.adafruit.com/transistors-101?view=all) - see FETs section and "How do I pick a transistor for the job?" section and "Driving a LED Strip" example.
+* [RGB LED strips usage](https://learn.adafruit.com/rgb-led-strips?view=all#usage) - the examples here are better as they show using MOSFETs (IRLB8721) or Darlington transistors (TIP120).
 
 [![3W RGB LED driver](3w-rgb-led-driver.png)](3w-rgb-led-driver.svg)
