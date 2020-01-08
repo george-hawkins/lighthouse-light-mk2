@@ -35,9 +35,13 @@ The following two Adafruit guides provide all the information we need:
 
 The [Fritzing](https://fritzing.org/home/) file for this circuit is [here](3w-rgb-led-circuit.fzz).
 
+Note: in the diagram above the 3W RGB LED is shown as if there were pins on the underside of the board, in reality you have to solder the resistors to each pad (or solder on jumper wires).
+
 This circuit uses a 3.7V battery. This [Adafruit forum post](https://forums.adafruit.com/viewtopic.php?f=47&t=79083) covers using a 5V source and lists the different limiting resistors needed when using 5V (rather than 3.7V).
 
 TODO: that post says you should use a 1W resistor for the red and 1/2W resistors for green and blue. So 5V is obviously higher than 3.7V but still this is quite a step up from the 1/4W resistors used on the Prop-Maker FeatherWing. Do you really need such high Wattage resistors and do I need higher than 1/4W resistors for my breadboard layout?
+
+TODO: this circuit is essentially the same as the MOSFET example in the [RGB LED strips guide](https://learn.adafruit.com/rgb-led-strips?view=all#usage). Like that example, I don't use pull-down resistors on the PWM pins. Why does the Prop-Maker FeatherWing include them?
 
 Alternatives
 ------------
