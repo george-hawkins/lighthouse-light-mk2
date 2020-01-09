@@ -65,3 +65,37 @@ Lighthouse light - mark 2
 * [Sparkfun 1/4 Watt resistor kit](https://www.sparkfun.com/products/10969)
 
 * ULN2803A at [Adafruit](https://www.adafruit.com/product/970) / at [Mouser](https://www.mouser.ch/ProductDetail/511-ULN2803A)
+
+Are these 3W RGB LEDs really that bright?
+-----------------------------------------
+
+So how do these 3W RGB LEDs compare with the brightest of the usual through-hole LEDs? It turns out it all depends what you mean by bright!
+
+If you look at the Adafruit product description for their 3W RGB LED you'll see:
+
+> Each of the red, green, and blue dice can handle continuous ~350mA current draw (with peaks of 1000mA). The light output is 110 lumens (110,000 millicandela) total.
+
+So the combined current draw of the three colors is around 1A and the total light output is about 110lm which Adafruit say this is equivalent to 110cd.
+
+However converting from lumens to candela isn't a simple one-to-one conversion as Adafruit seem to suggest. It depends on what's called the apex angle and the conversion is only one-to-one if the apex angle is ~65.5&deg;. However according to the LED's datasheet its apex angle is 120&deg; - so 110lm and an apex angle of 120&deg; converts to just 35cd (see the RapidTables [lumens-to-candela calculator](https://www.rapidtables.com/calc/light/lumen-to-candela-calculator.html)).
+
+If you then look at the product page for the Adafruit [super-bright white 5mm LED](https://www.adafruit.com/product/754) you can see:
+
+> * 15,000 mcd minimum brightness
+> * Viewing Angle : +/-12 degrees
+> * Maximum continuous current: 20 mA
+
+They say you get 15cd minimum _brightness_ and that for just 20mA.  So it seems like just 3 of these will achieve more brightness than the 3W RGB LED and for only 60mA in total (which an MCU board can deliver directly without requiring MOSFETs etc.).
+
+So what's going on here? It turns out that when engineers talk about lumens and candella, they're talking about intensity and light output in a far more precise manner than when people use the word "brightness" in everyday language. For us, it's generally not really useful to compare one candela value with another if you don't also talk about the apex angle. If you're just interested in the total amount of light output by the LED then it's more useful to talk in terms of lumens. So instead of converting things to candela, as above, let's convert to lumens.
+
+The 15cd and an apex angle of 24&deg; (2 x 12&deg;) for the super-bright white 5mm LED, converts to just 2lm (see the RapidTables [candela-to-lumens calculator](https://www.rapidtables.com/calc/light/candela-to-lumen-calculator.html)).
+
+So the total light output of the 3W RGB LED, with its 110lm, is 55 times that of the brightest of Adafruit's through hole LED - that sounds a bit more impressive.
+
+For much more on the relationship between candela and lumens see CompuPhase's [Candela, Lumen, Lux: the equations](https://www.compuphase.com/electronics/candela_lumen.htm). In short you can sum it up as follows. The total light output of a laser pointer is fairly low but the light it does output is very focused - the intensity of this light is very high but it just lights up a tiny point. So a laser pointer has a very high candela value but a low lumens value. In contrast a light bulb outputs a lot of light but in all directions (unlike the focused beam of a laser pointer) so it lights up a whole room but the light isn't very intense. So a light bulb has a far higher lumens value but a relatively low candela value.
+
+If you look at Mouser or Digikey you can find 20mA white LEDs (like [this](https://www.mouser.ch/ProductDetail/941-C503DWANCCBEB152)) that go up to 48cd and red LEDs, which for whatever reason are produced with much higher candela values than blue or green LEDs, (like [this](https://www.mouser.ch/ProductDetail/78-VLCS5830)) that go up to 65cd. However if you look at such products you'll see that their apex angles are tiny. For standard 20mA LEDs the higher the candela value the lower the apex angle and once you take this into account you can see that all such LEDs tend to produce much the same light output - around 1 or 2lm.
+
+TODO: it seems to me that viewing angle and apex angle are equivalent - is this definitely correct?
+
