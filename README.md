@@ -26,7 +26,7 @@ Creating the 3W LED driver circuit with through-hole components
 
 So as we can see the necessary circuit is very simple. Now let's look at how to reproduce it on a breadboard.
 
-The following two Adafruit guides provide all the information we need:
+The following two Adafruit guides provided all the information needed to produce the circuit below:
 
 * [Adafruit transistors 101](https://learn.adafruit.com/transistors-101?view=all) - in particular see the FETs section, the "How do I pick a transistor for the job?" section and the "Driving a LED Strip" example (using Darlington transistors).
 * The usage section of the [RGB LED strips guide](https://learn.adafruit.com/rgb-led-strips?view=all#usage) - the examples here are better as they show using MOSFETs ([IRLB8721](https://www.adafruit.com/product/355)) as well as Darlington transistors ([TIP120](https://www.adafruit.com/product/976)).
@@ -35,7 +35,7 @@ The following two Adafruit guides provide all the information we need:
 
 The [Fritzing](https://fritzing.org/home/) file for this circuit is [here](3w-rgb-led-circuit.fzz).
 
-Note: in the diagram above the 3W RGB LED is shown as if there were pins on the underside of the board, in reality you have to solder the resistors to each pad (or solder on jumper wires).
+Note: in the diagram above the 3W RGB LED is shown as if it were a breadboardable component (with pins on the underside corresponding to the pads seen on the top). In reality you'd have to solder the resistors directly to each pad (or solder on jumper wires).
 
 This circuit uses a 3.7V battery. This [Adafruit forum post](https://forums.adafruit.com/viewtopic.php?f=47&t=79083) covers using a 5V source and lists the different limiting resistors needed when using 5V (rather than 3.7V).
 
@@ -75,7 +75,7 @@ If you look at the Adafruit product description for their 3W RGB LED you'll see:
 
 > Each of the red, green, and blue dice can handle continuous ~350mA current draw (with peaks of 1000mA). The light output is 110 lumens (110,000 millicandela) total.
 
-So the combined current draw of the three colors is around 1A and the total light output is about 110lm which Adafruit say this is equivalent to 110cd.
+So the combined current draw of the three colors is around 1A and the total light output is about 110lm which Adafruit say is equivalent to 110cd.
 
 However converting from lumens to candela isn't a simple one-to-one conversion as Adafruit seem to suggest. It depends on what's called the apex angle and the conversion is only one-to-one if the apex angle is ~65.5&deg;. However according to the LED's datasheet its apex angle is 120&deg; - so 110lm and an apex angle of 120&deg; converts to just 35cd (see the RapidTables [lumens-to-candela calculator](https://www.rapidtables.com/calc/light/lumen-to-candela-calculator.html)).
 
