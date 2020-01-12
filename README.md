@@ -3,6 +3,8 @@
 
 This page covers hooking up the Adafruit [3W RGB common anode LED](https://www.adafruit.com/product/2530). Most devices, that sites like Adafruit and Sparkfun supply, can simply be powered directly from the MCU board that you're using in your project. However the 3W RGB LED is rather more complex to deal with as it draws significantly more power than an MCU board can supply.
 
+![3W RGB LED product image](3w-rgb-led-image.png)
+
 TLDR; just jump to the breadboard diagram shown and set up the circuit shown making sure to use resistors with a suitable power rating.
 
 ---
@@ -17,7 +19,7 @@ The Prop-Maker FeatherWing uses a very simple circuit for controlling a 3W RGB L
 
 The circuit itself just of a 100k&ohm; pull-down resistor for each PWM input followed by a [DMG3406](https://www.mouser.ch/ProductDetail/621-DMG3406L-7) MOSFET and a limiting resistor for the particular LED color that it controls. If you look at the [datasheet](https://cdn-shop.adafruit.com/product-files/2530/FD-3RGB-Y2.pdf) for the RGB LED you'll see that the forward voltage for red is 2.5V while it's 3.6V for green and blue, hence the different limiting resistors - 3&ohm; for red and 1.75&ohm; for green and blue.
 
-As you can see in the schematic, the pull-down resistors are marked as 0603 and the limiting resistors are marked as 1206 - 0603 resistors are usually 0.1W and 1206 resistors are usually 0.25W (see [resistor sizes and packages](http://www.resistorguide.com/resistor-sizes-and-packages/)). 0.1W is fine for the 100k&ohm pull-down resistors and 0.25W is fine for the 1.75&ohm; blue and green limiting resistors but the red limiting resistor is probably 0.5W (see down below for more details).
+As you can see in the schematic, the pull-down resistors are marked as 0603 and the limiting resistors are marked as 1206 - 0603 resistors are usually 0.1W and 1206 resistors are usually 0.25W (see [resistor sizes and packages](http://www.resistorguide.com/resistor-sizes-and-packages/)). 0.1W is fine for the 100k&ohm; pull-down resistors and 0.25W is fine for the 1.75&ohm; blue and green limiting resistors but the red limiting resistor is probably 0.5W (see down below for more details).
 
 
 If you look at the [Prop-Maker FeatherWing guide](https://learn.adafruit.com/adafruit-prop-maker-featherwing?view=all) you can clearly see this circuit in the guide's hi-resolution image of the top of the board:
