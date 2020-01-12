@@ -63,6 +63,8 @@ While Darlington transistors are less efficient you can get eight of them bundle
 
 TODO: circuit with ULN2803 - work out suitable resistors - the voltage drop of the ULN2803 depends on the current so wire it up the same resistors as with the MOSFETs, work out the actual voltage seen by the LED and the limiting resistors and work out proper limiting resistor value for this setup. See how hot the ULN2803 gets.
 
+Try starting with just a 15&ohm; resistor, i.e. no LED, then measure the current, then move down to 10&ohm; and 5&ohm; with 5&ohm; potentiometer is series (see 2W parts down below) and work out resistance needed to achieve 350mA.
+
 **Question:** if you can get Darlington transistors in a convenient DIP format then can't you also get MOSFETs in a similar format?
 
 The short answer is **no**.
@@ -194,3 +196,18 @@ Misc
 * [Sparkfun 1/4 Watt resistor kit](https://www.sparkfun.com/products/10969)
 
 * ULN2803A at [Adafruit](https://www.adafruit.com/product/970) / at [Mouser](https://www.mouser.ch/ProductDetail/511-ULN2803A)
+
+---
+
+Parts:
+
+* 2W 5&ohm; resistor - https://www.digikey.com/product-detail/en/yageo/PNP5WVJT-73-5R/YAG1206CT-ND/4135362
+* 2W 10&ohm; resistor - https://www.digikey.com/product-detail/en/yageo/FMP200JR-52-10R/10ZCT-ND/2058964
+* 2W 15&ohm; resistor - https://www.digikey.com/product-detail/en/yageo/FMP200JR-52-15R/15ZCT-ND/2058972
+
+* 5&ohm; potentiometer - https://www.mouser.com/ProductDetail/774-026TB32R5A0B1A1 - $5.23
+* 2W 5.1&ohm; resistor - https://www.mouser.com/ProductDetail/282-5.1-RC
+* 2W 10&ohm; resistor - https://www.mouser.com/ProductDetail/282-10-RC
+* 2W 15&ohm; resistor - https://www.mouser.com/ProductDetail/282-15-RC
+
+Note: Yageo is Digikey and Xicon is Mouser - see the [AdaWiki partfinder](https://www.ladyada.net/wiki/partfinder).
