@@ -19,8 +19,7 @@ The Prop-Maker FeatherWing uses a very simple circuit for controlling a 3W RGB L
 
 The circuit itself just of a 100k&ohm; pull-down resistor for each PWM input followed by a [DMG3406](https://www.mouser.ch/ProductDetail/621-DMG3406L-7) MOSFET and a limiting resistor for the particular LED color that it controls. If you look at the [datasheet](https://cdn-shop.adafruit.com/product-files/2530/FD-3RGB-Y2.pdf) for the RGB LED you'll see that the forward voltage for red is 2.5V while it's 3.6V for green and blue, hence the different limiting resistors - 3&ohm; for red and 1.75&ohm; for green and blue.
 
-As you can see in the schematic, the pull-down resistors are marked as 0603 and the limiting resistors are marked as 1206 - 0603 resistors are usually 0.1W and 1206 resistors are usually 0.25W (see [resistor sizes and packages](http://www.resistorguide.com/resistor-sizes-and-packages/)). 0.1W is fine for the 100k&ohm; pull-down resistors and 0.25W is fine for the 1.75&ohm; blue and green limiting resistors but the red limiting resistor is probably 0.5W (see down below for more details).
-
+As you can see in the schematic, the pull-down resistors are marked as 0603 and the limiting resistors are marked as 1206 - 0603 resistors are usually 0.1W and 1206 resistors are usually 0.25W (see [resistor sizes and packages](http://www.resistorguide.com/resistor-sizes-and-packages/)). 0.1W is fine for the 100k&ohm; pull-down resistors and 0.25W is fine for the 1.75&ohm; blue and green limiting resistors but the red limiting resistor is probably at least 0.5W, if not 1W (see down below for more details).
 
 If you look at the [Prop-Maker FeatherWing guide](https://learn.adafruit.com/adafruit-prop-maker-featherwing?view=all) you can clearly see this circuit in the guide's hi-resolution image of the top of the board:
 
@@ -48,9 +47,14 @@ Note: in the diagram above the 3W RGB LED is shown as if it were a breadboardabl
 
 This circuit uses a 3.7V battery.
 
-**Important:** when using 3.7V it's fine to use normal 0.25W resistors for the 1.75&ohm; limiting resistors for green and blue but you'll need to use a higher power 0.5W resistor for the 3&ohm; limiting resistor for red (see below for more details).
+* [1W 3&ohm; resistor](https://www.digikey.com/product-detail/en/yageo/FMP100JR-52-3R/3.0WCT-ND/2058923) - $0.40
+* [1/4W 1.8&ohm; resistor](https://www.digikey.com/product-detail/en/yageo/CFR-25JB-52-1R8/1.8QBK-ND/154) - $0.10 - 1.8&ohm; is as close as you can get to 1.75&ohm; for through-hole resistors.
 
-TODO: that post says you should use a 1W resistor for the red and 1/2W resistors for green and blue. So 5V is obviously higher than 3.7V but still this is quite a step up from the 1/4W resistors used on the Prop-Maker FeatherWing. Do you really need such high Wattage resistors and do I need higher than 1/4W resistors for my breadboard layout?
+**Important:** when using 3.7V LiPo it's fine to use normal 0.25W resistors for the 1.75&ohm; limiting resistors for green and blue but you'll need to use a higher power 1W resistor for the 3&ohm; limiting resistor for red (see below for more details).
+
+Or should the 3&ohm; really be a 4.9&ohm;? See my [forum question](https://forums.adafruit.com/viewtopic.php?f=47&t=160899). If so a [1W 5.1&ohm; resistor](https://www.digikey.com/product-detail/en/yageo/KNP1WSJR-52-5R1/5.1GCCT-ND/2813153) is about the closest through-hole resistor you can get.
+
+TODO: confirm where it should be 3&ohm; or 4.9&ohm; with the potentiometer that's mentioned later.
 
 TODO: this circuit is essentially the same as the MOSFET example in the [RGB LED strips guide](https://learn.adafruit.com/rgb-led-strips?view=all#usage). Like that example, I don't use pull-down resistors on the PWM pins. Why does the Prop-Maker FeatherWing include them?
 
@@ -134,7 +138,7 @@ The resistors that you use in most simple electronics projects are 0.25W resisto
 
 Each color in our 3W RGB LED draws 350mA. The voltage drop across red is 2.5V (see _V<sub>f</sub>_) above and 3.6V for green and blue.
 
-If we're using a 5V power source this means the voltage drop is (5 - 2.5) = 2.5V for red and (5 - 3.6) = 1.4V for green and blue.
+If we're using a 5V power source this means the voltage drop across the limiting resistor is (5 - 2.5) = 2.5V for red and (5 - 3.6) = 1.4V for green and blue.
 
 So as _W = VI_ (power = voltage * current) then we get:
 
@@ -149,6 +153,13 @@ If we're using a 3.7V power source then we get:
 * Green/blue = (3.7 - 3.6) * 0.35 = 0.035W
 
 So we need a 0.5W resistor for red and a normal 0.25W resistor for green and blue.
+
+But if instead of 3.7V we use 4.2V, i.e. the voltage of a fully charged LiPo, we get:
+
+* Red = (4.2 - 2.5) * 0.35 = 0.6W
+* Green/blue = (4.2 - 3.6) * 0.35 = 0.2W
+
+So we're still OK with normal 0.25W resistor for green and blue but a 1W resistor for red is probably necessary.
 
 Are these 3W RGB LEDs really that bright?
 -----------------------------------------
@@ -188,10 +199,6 @@ TODO: it seems to me that viewing angle and apex angle are equivalent - is this 
 
 Misc
 ----
-
-* [1/4W 1.8&ohm; resistor](https://www.digikey.com/product-detail/en/yageo/CFR-25JB-52-1R8/1.8QBK-ND/154) - $0.10 - 1.8&ohm; is as close as you can get to 1.75&ohm; for through-hole resistors.
-
-* [1/4W 3&ohm; resistor](https://www.digikey.com/product-detail/en/yageo/CFR-25JB-52-3R/3.0QBK-ND/1440) - $0.10
 
 * [Sparkfun 1/4 Watt resistor kit](https://www.sparkfun.com/products/10969)
 
