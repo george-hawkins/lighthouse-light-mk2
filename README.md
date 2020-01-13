@@ -58,6 +58,8 @@ TODO: confirm where it should be 3&ohm; or 4.9&ohm; with the potentiometer that'
 
 TODO: this circuit is essentially the same as the MOSFET example in the [RGB LED strips guide](https://learn.adafruit.com/rgb-led-strips?view=all#usage). Like that example, I don't use pull-down resistors on the PWM pins. Why does the Prop-Maker FeatherWing include them?
 
+Note: that 3.7V LiPo batteries are actually 4.2V when fully charged (see the [voltages page](https://learn.adafruit.com/li-ion-and-lipoly-batteries/voltages) of the Adafruit guide to LiPo batteries for more on the discharge profile of such batteries).
+
 Using Darlington transistors
 ----------------------------
 
@@ -120,7 +122,14 @@ If we change _V<sub>s</sub>_ to 3.7V, e.g. a LiPo battery, then we get:
 * Red = (3.7 - 2.5) / 0.35 = 3.4&ohm;.
 * Green/blue = (3.7 - 3.6) / 0.35 = 0.3&ohm;.
 
-These values are quite different from the 3&ohm; and 1.75&ohm; resistors used in the Prop-Maker FeatherWing (and it's not a availability issues - you can get SMD resistors corresponding exactly to 3.4&ohm; and 0.3&ohm;).
+TODO: get rid of all calculations based on 3.7V and just leave the 4.2V ones.
+
+Or if we change _V<sub>s</sub>_ to 4.2V, the fully charged voltage of a 3.7V LiPo battery, then we get:
+
+* Red = (4.2 - 2.5) / 0.35 = 4.86&ohm;.
+* Green/blue = (4.2 - 3.6) / 0.35 = 1.71&ohm;
+
+So the 1.75&ohm; value for green and blue looks OK, if we use a supply voltage of 4.2V, but the red value here looks quite different to the 3&ohm; used in the Prop-Maker FeatherWing.
 
 **TODO:** you can calculate the implied supply voltage, given the limiting resistor value, using _V<sub>s</sub> = iR + V<sub>f</sub>_. If you use 3&ohm; and 1.75&ohm; you get:
 
