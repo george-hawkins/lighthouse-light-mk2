@@ -54,6 +54,10 @@ This circuit uses a 3.7V battery.
 
 Or should the 3&ohm; really be a 4.9&ohm;? See my [forum question](https://forums.adafruit.com/viewtopic.php?f=47&t=160899). If so a [1W 5.1&ohm; resistor](https://www.digikey.com/product-detail/en/yageo/KNP1WSJR-52-5R1/5.1GCCT-ND/2813153) is about the closest through-hole resistor you can get.
 
+Note: I calculate 1.71&ohm; for the green/blue resistor - you can't closer than 1.8&ohm; to that.
+
+And if you look at the image of an actual board the SMD codes of the green and blue resistors are near enough to what you'd expect (1R82 is 1.82&ohm;) but red is 3R6, i.e. 3.6&ohm; which doesn't get is neither the 3&ohm; of the schematic nor the 4.9&ohm; I calculate below. 3.6&ohm; implies a supply current of 0.35 * 3.6 + 2.5 = 3.8V.
+
 TODO: confirm where it should be 3&ohm; or 4.9&ohm; with the potentiometer that's mentioned later.
 
 TODO: this circuit is essentially the same as the MOSFET example in the [RGB LED strips guide](https://learn.adafruit.com/rgb-led-strips?view=all#usage). Like that example, I don't use pull-down resistors on the PWM pins. Why does the Prop-Maker FeatherWing include them?
