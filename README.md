@@ -60,9 +60,27 @@ And if you look at the image of an actual board the SMD codes of the green and b
 
 TODO: this is all so odd that it's probably best to work out suitable resistors with a real LED and the 5&ohm; potentiometer that's mentioned later.
 
-TODO: this circuit is essentially the same as the MOSFET example in the [RGB LED strips guide](https://learn.adafruit.com/rgb-led-strips?view=all#usage). Like that example, I don't use pull-down resistors on the PWM pins. Why does the Prop-Maker FeatherWing include them?
-
 Note: that 3.7V LiPo batteries are actually 4.2V when fully charged (see the [voltages page](https://learn.adafruit.com/li-ion-and-lipoly-batteries/voltages) of the Adafruit guide to LiPo batteries for more on the discharge profile of such batteries).
+
+Pull-down resistors
+-------------------
+
+The Prop-Maker FeatherWing schematic includes pull-down resistors while the circuit here does not (and neither does the [example](https://learn.adafruit.com/rgb-led-strips?view=all#usage) in the RGB LED strips guide).
+
+The general consensus is that you should include pull-down resistors on a daughter board like the FeatherWing so that the MOSFETs behave if nothing is connected to the base, e.g. if the PWM pins are left unconnected. However you can do without the pull-down resistors if you're sure your MOSFETs will definitely be fully connected up, as here, and there's a single power source for both your MCU board and the current controlled by the MOSFETs (as is also the case here), i.e. when the MCU board is unpowered so is the rest of the circuit.
+
+The only time as which the lack of pull-down resistors might be an issue is when the MCU board is reset - during this phase the state of the PWM pins is undefined and may result in the MOSFETs blinking on for a moment. That the LEDs blink momentarily isn't really an issue but it might be when controlling something else, e.g. motors.
+
+The necessary 10k&ohm; are cheap and a trivial addition so including them if you feel you need them isn't much of an issue.
+
+Code
+----
+
+The [Prop-Maker FeatherWing guide](https://learn.adafruit.com/adafruit-prop-maker-featherwing?view=all) includes code sections for both Arduino environment C and for CircuitPython.
+
+The Arduino C [3W RGB LED example](https://learn.adafruit.com/adafruit-prop-maker-featherwing?view=all#3-watt-led-3-15) can be used unchanged with the circuit here if you use the same MCU pins as seen in the initial `#define` section. This example does not require any additional libraries.
+
+Similarly the CircuitPython [example](https://learn.adafruit.com/adafruit-prop-maker-featherwing?view=all#3-watt-led-4-14) does not require anything beyond the core CircuitPython modules and can be used unchanged if you use the D11, D12 and D13 pins as setup when the `red`, `green` and `blue` variables are declared.
 
 Using Darlington transistors
 ----------------------------
