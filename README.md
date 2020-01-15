@@ -101,7 +101,7 @@ The ULN2803 has been around forever and continues to be produced. The DIP format
 
 You can buy what are called LED driver chips (the kind of thing that's used in a typical LED lightbulb) however most of these are SMD. There are a few LED drivers in DIP format, like the TI [TLC59211IN](https://www.mouser.ch/ProductDetail/595-TLC59211IN) that use [DMOS](https://en.wikipedia.org/wiki/Power_MOSFET), i.e. MOSFETs. But these can't sink more than 200mA per output which is significantly less than the 350mA needed for the 3W RGB LED. If you could get 200mA through-hole LEDs this might still be an interesting chip to use in projects - however 20mA seems to be the limit for commonly available through-hole LEDs (you can find higher current ones but for the ones I found the higher current, for whatever reason, doesn't seem to translate to an interesting increase in lumens).
 
-TODO: are there through-hole 200mA LEDs anywhere that do produce a significant numbers of lumens, e.g. in the 10+ lumens range?
+TODO: are there through-hole 200mA LEDs anywhere that do produce a significant numbers of lumens, e.g. in the 10+ lumens range? I asked about this [here](https://forums.adafruit.com/viewtopic.php?f=8&t=160984) of the Adafruit forums.
 
 Alternatives
 ------------
