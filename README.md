@@ -89,7 +89,7 @@ Instead of the MOSFETs you could use Darlington transistors (like this [TIP120 3
 
 While Darlington transistors are less efficient you can get eight of them bundled up in a very convenient breadboardable DIP chip - the [ULN2803](https://www.adafruit.com/product/970) (which, at $2 from Adafruit or $1.20 from Mouser or Digikey, is very cheap as well as convenient).
 
-TODO: circuit with ULN2803 - work out suitable resistors - the voltage drop of the ULN2803 depends on the current so wire it up the same resistors as with the MOSFETs, work out the actual voltage seen by the LED and the limiting resistors and work out proper limiting resistor value for this setup. See how hot the ULN2803 gets.
+TODO: circuit with ULN2803 - see the Adafruit [sign driver guide](https://learn.adafruit.com/led-neon-signs?view=all#build-the-sign-driver) for a good example. Work out suitable resistors - the voltage drop of the ULN2803 depends on the current so wire it up the same resistors as with the MOSFETs, work out the actual voltage seen by the LED and the limiting resistors and work out proper limiting resistor value for this setup. See how hot the ULN2803 gets.
 
 Try starting with just a 15&ohm; resistor, i.e. no LED, then measure the current, then move down to 10&ohm; and 5&ohm; with 5&ohm; potentiometer is series (see 2W parts down below) and work out resistance needed to achieve 350mA.
 
