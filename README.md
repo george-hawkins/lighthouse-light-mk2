@@ -62,6 +62,8 @@ TODO: this is all so odd that it's probably best to work out suitable resistors 
 
 Note: that 3.7V LiPo batteries are actually 4.2V when fully charged (see the [voltages page](https://learn.adafruit.com/li-ion-and-lipoly-batteries/voltages) of the Adafruit guide to LiPo batteries for more on the discharge profile of such batteries).
 
+TODO: is there 5V on Vbat when recharging the LiPo via USB? If so will this cause problems for recharging if the source is low amps, e.g. 500mA for a laptop USB port, or will it cause problems if the source is high amps, e.g. a 2A power adapter, i.e. enough to charge and drive the LED circuit at 5V (despite the limiting resistors being for just 4.2V)? This would be kind of stupid - it'd mean your circuit has to be 3.2V to 5V tolerant.
+
 Pull-down resistors
 -------------------
 
