@@ -73,6 +73,8 @@ The only time as which the lack of pull-down resistors might be an issue is when
 
 The necessary 10k&ohm; are cheap and a trivial addition so including them if you feel you need them isn't much of an issue.
 
+See the Adafruit [pulse room guide](https://learn.adafruit.com/pulse-room?view=all#led-driver) for a LED driver circuit that does use a pull-down resistor.
+
 Code
 ----
 
