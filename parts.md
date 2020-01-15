@@ -77,3 +77,14 @@ Sugru family-safe black 3 pack:
 Note: Sugru has a relatively short shelf life of 13 months so be aware of this when buying.
 
 High-viscosity glue from a glue gun might be just as good for this project.
+
+### Heatsinks
+
+* [7x7x10mm heatsink](https://www.adafruit.com/product/1493) - $1 - plus [thermal tape](https://www.adafruit.com/product/1467) - $1.
+* [14x14x8 heatsink with thermal tape](https://www.adafruit.com/product/3083) - $1.50
+
+### Heat shrink tubing
+
+* [40mm 1m clear (also other sizes, lengths and colors)](https://www.ebay.ie/itm/PVC-Heat-Shrink-Tubing-Wrap-RC-Battery-Pack-17mm-150mm-LiPO-NiMH-NiCd-UK/361275492238?hash=item541db2878e:m:mNnqT-c4-rSEm2ffvforNOg&var=630618338782) - GBP 2 - eBay UK based.
+* [40mm 1m clear (also other sizes, lengths and colors)](https://www.ebay.ie/itm/17MM-103MM-Wide-PVC-Heat-Shrink-Tubing-Wrap-Lipo-Li-ion-NiCd-RC-Battery-Pack/390950012124?hash=item5b066fc4dc:m:mVJw-PpLDMtp3s11XBOzDPw&var=660566819761) - GBP 1 - eBay China based.
+* [40mm 2m clear (also other sizes, lengths and colors)](https://www.ebay.ie/itm/17mm-103mm-PVC-Heat-Shrink-Tubing-Wrap-Lipo-Li-ion-Ni-MH-NiCd-RC-Battery-Pack/252489229777?hash=item3ac987e5d1:m:mQX3I1eDATr8xytV50t9PnQ&var=551375439082) - GBP 1.60 - eBay China based.
