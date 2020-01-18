@@ -27,7 +27,11 @@ If you look at the [Prop-Maker FeatherWing guide](https://learn.adafruit.com/ada
 
 The pull-down resistors are to the left, then the three pin MOSFETs, then the larger limiting resistors and finally pads for connecting the 3W RGB LED.
 
-If you look at the [complete schematic](https://learn.adafruit.com/assets/69243) and the [logic pins section](https://learn.adafruit.com/adafruit-prop-maker-featherwing?view=all#logic-pins-2-5) of the guide, it's clear that you just connect the PWM inputs directly to pins on your MCU while V+ is connected either directly to your battery or to a pin on your MCU that provides the battery voltage directly (you should **not** attempt to power it off one of the logic pins on your MCU board, these can typically supply at most 40mA and will burn out trying to power a circuit like this).
+If you look at the [complete schematic](https://learn.adafruit.com/assets/69243) and the [logic pins section](https://learn.adafruit.com/adafruit-prop-maker-featherwing?view=all#logic-pins-2-5) of the guide, it's clear that you just connect the PWM inputs directly to pins on your MCU while V+ is connected either directly to your battery or to a pin on your MCU that provides the battery voltage directly.
+
+You should **not** attempt to power it off one of the logic pins on your MCU board - this will destroy the pin as the older 5V Arduinos can only handle about 40mA per GPIO pin and the newer 3.3V ARM-based MCU boards can typically only handle at most 10mA per pin (and around 200mA and 130mA respectively for all such pins combined).
+
+Note: a classic Arduino UNO can power a basic 20mA LED directly from a GPIO pin but however newer 3.3V ARM-based MCU boards can't provide enough current to drive them directly at full power. Instead they'd need to use a transisor to get full brightness out of these basic LEDs. To see how to drive a 20mA LED using a transistor see this [example](https://learn.sparkfun.com/tutorials/installing-libmraa-on-ubilinux-for-edison#the-circuit) from Sparkfun or this slightly different schematic in this ElectricalEngineering StackExchange [answer](https://electronics.stackexchange.com/a/60868/27099) (that doesn't invovle a current limiting resistor on the GPIO pin).
 
 Creating the 3W LED driver circuit with through-hole components
 ---------------------------------------------------------------
