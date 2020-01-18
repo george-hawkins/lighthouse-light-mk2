@@ -36,6 +36,8 @@ There are no end of no-name ESP32 modules available on sites like Banggood and E
 
 Note: the 32 is the original Espressif module, the 32D is the newer module and the 32U is the 32D with a connector for an external antennae rather than a builtin PCB antennae.
 
+**Question:** the HUZZAH32 - ESP32 Feather Board provides separate Vbat and Vusb pins so you can easily construct a circuit that works off Vbat only. However the Olimex ESP32-DevKit-LiPo tries to be pin compatible with the ESP32-DevKitC-32D (which only supports power via 5V USB) - so, _if I read the schematic correctly_, you've just got the 5V input voltage pin and you'll either see 5V or 3.7V on this pin depending on whether you're using USB power or battery power. TODO: ask Olimex if there's anyway to construct a circuit such that you only get power via this pin if battery power is being used?
+
 ### Lighthouse mark 2
 
 | Description | Quantity | Adafruit | Mouser | Digikey |
