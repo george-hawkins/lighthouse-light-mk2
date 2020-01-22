@@ -32,7 +32,7 @@ Similar [2600mAh 18650 battery](https://www.aliexpress.com/item/32822109986.html
 * $11 - [Olimex ESP32-DevKit-LiPo](https://www.olimex.com/Products/IoT/ESP32/ESP32-DevKit-LiPo/open-source-hardware).
 * $21 - [SparkFun Thing Plus - ESP32 WROOM](https://www.sparkfun.com/products/15663).
 
-There are no end of no-name ESP32 modules available on sites like Banggood and Espressif themselves produce the nice cheap [ESP32-DevKitC-32D](https://www.mouser.com/ProductDetail/Espressif-Systems/ESP32-DevKitC-32D) - however the ESP32-DevKitC-32D and most of these other boards don't have a LiPo JST connector (and the no-name boards generally come with no documentation).
+There are no end of no-name ESP32 modules available on sites like Banggood and Espressif themselves produce the nice cheap [ESP32-DevKitC-32D](https://www.mouser.com/ProductDetail/356-ESP32-DEVKITC32D) - however the ESP32-DevKitC-32D and most of these other boards don't have a LiPo JST connector (and the no-name boards generally come with no documentation).
 
 Note: the 32 is the original Espressif module, the 32D is the newer module and the 32U is the 32D with a connector for an external antennae rather than a builtin PCB antennae.
 
