@@ -72,7 +72,7 @@ Memory Protection Devices (MPD) provide battery holders designed for protected 1
 
 The above links are to Digikey - these battery holders are available from many other suppliers, e.g. [Reichelt](https://www.reichelt.com/ch/en/Battery-holder-for-other-types-of-batteries/2/index.html?ACTION=2&LA=2&GROUPID=6538&nbc=1) (just select Memory Protection Digikey under the manufacturer filter).
 
-Banggood of MPD battery holder for *protected* 18650, [with leads](https://www.banggood.com/DIY-1-Slot-18650-Battery-Holder-With-2-Leads-p-972775.html) and [without leads](https://www.banggood.com/DIY-Storage-Box-Holder-Case-For-1-x-18650-Rechargeable-Battery-p-1006063.html).
+Banggood knockoff of MPD battery holder for *protected* 18650, [with leads](https://www.banggood.com/DIY-1-Slot-18650-Battery-Holder-With-2-Leads-p-972775.html) and [without leads](https://www.banggood.com/DIY-Storage-Box-Holder-Case-For-1-x-18650-Rechargeable-Battery-p-1006063.html).
 
 Adafruit [JST PH 2-pin 100mm cable with female connector](https://www.adafruit.com/product/261) or, if you need something longer, their [JST PH extension cable](https://www.adafruit.com/product/1131) (just chop off the unneeded end).
 
