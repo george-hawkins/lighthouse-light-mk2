@@ -44,7 +44,7 @@ Note: the 32 is the original Espressif module, the 32D is the newer module and t
 |-------------|----------|----------|--------|---------|
 | Adafruit Pixie | 1 | [$15](https://www.adafruit.com/product/2741) |  [$15](https://www.mouser.com/ProductDetail/485-2741) | [$15](https://www.digikey.com/product-detail/en/adafruit-industries-llc/2741/1528-1538-ND/5804104) |
 | Plastic gearbox motor - 200RPM | 2 | [$3](https://www.adafruit.com/product/3777) | [$3](https://www.mouser.com/ProductDetail/485-3777) | [$3](https://www.digikey.com/product-detail/en/adafruit-industries-llc/3777/1528-2589-ND/8687221) |
-| motor hub | 1 | [$1](https://www.adafruit.com/product/3880) | [$1](https://www.mouser.com/ProductDetail/485-3880) | [$1](https://www.digikey.com/product-detail/en/adafruit-industries-llc/3880/1528-2699-ND/9603622) |
+| Eccentric motor hub | 1 | [$1](https://www.adafruit.com/product/3880) | [$1](https://www.mouser.com/ProductDetail/485-3880) | [$1](https://www.digikey.com/product-detail/en/adafruit-industries-llc/3880/1528-2699-ND/9603622) |
 | motor pulley | 1 | [$0.75](https://www.adafruit.com/product/3789) | [$0.75](https://www.mouser.com/ProductDetail/485-3789) | [$0.75](https://www.digikey.com/product-detail/en/adafruit-industries-llc/3789/1528-2602-ND/9342241) |
 | DRV8833 motor driver breakout | 1 | [$5](https://www.adafruit.com/product/3297) | [$5](https://www.mouser.com/ProductDetail/485-3297) | [$5](https://www.digikey.com/product-detail/en/adafruit-industries-llc/3297/1528-1795-ND/6419360) |
 | JST on/off switch | 1 | [$3](https://www.adafruit.com/product/3064) | [$3](https://www.mouser.com/ProductDetail/485-3064) | [$3](https://www.digikey.com/product-detail/en/adafruit-industries-llc/3064/1528-1679-ND/6022074) |
