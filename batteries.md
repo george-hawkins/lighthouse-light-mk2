@@ -82,7 +82,7 @@ Banggood [NCR18650B 3.7V 3400mAh protected 18650 battery](https://www.banggood.c
 
 * AkkuShop Schweiz [NCR18650B 3400mAh protected 18650](https://www.akkushop-schweiz.ch/ch/panasonic-18650-li-ion-akku-mit-3400mah-und-eigener-schutzschaltung-ca.-68-x-18mm-beachten/) - Fr. 30.
 * AkkuShop Schweiz [NCR18650B 2900mAh protected 18650](https://www.akkushop-schweiz.ch/ch/panasonic-ncr18650-pf-2900mah-pcb-geschuetzt/) - Fr. 26.
-* Conrad DE [NCR18650B 3400mah protected 18650](https://www.conrad.de/de/p/panasonic-ncr18650b-spezial-akku-18650-li-ion-3-7-v-3400-mah-1009507.html) - EUR 19 (not listed on condrad.ch).
+* Conrad DE [NCR18650B 3400mah protected 18650](https://www.conrad.de/de/p/panasonic-ncr18650b-spezial-akku-18650-li-ion-3-7-v-3400-mah-1009507.html) - EUR 19 (not listed on conrad.ch).
 
 18650 Battery Store protected 18650 batteries:
 
