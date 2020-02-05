@@ -90,3 +90,27 @@ High-viscosity glue from a glue gun might be just as good for this project.
 * [40mm 1m clear (also other sizes, lengths and colors)](https://www.ebay.ie/itm/PVC-Heat-Shrink-Tubing-Wrap-RC-Battery-Pack-17mm-150mm-LiPO-NiMH-NiCd-UK/361275492238?hash=item541db2878e:m:mNnqT-c4-rSEm2ffvforNOg&var=630618338782) - GBP 2 - eBay UK based.
 * [40mm 1m clear (also other sizes, lengths and colors)](https://www.ebay.ie/itm/17MM-103MM-Wide-PVC-Heat-Shrink-Tubing-Wrap-Lipo-Li-ion-NiCd-RC-Battery-Pack/390950012124?hash=item5b066fc4dc:m:mVJw-PpLDMtp3s11XBOzDPw&var=660566819761) - GBP 1 - eBay China based.
 * [40mm 2m clear (also other sizes, lengths and colors)](https://www.ebay.ie/itm/17mm-103mm-PVC-Heat-Shrink-Tubing-Wrap-Lipo-Li-ion-Ni-MH-NiCd-RC-Battery-Pack/252489229777?hash=item3ac987e5d1:m:mQX3I1eDATr8xytV50t9PnQ&var=551375439082) - GBP 1.60 - eBay China based.
+
+### Power supplies
+
+[Digikey 5V power adapters](https://www.digikey.com/products/en/power-supplies-external-internal-off-board/ac-dc-desktop-wall-adapters/130?FV=48%7C230908%2C48%7C231255%2C48%7C231500%2C48%7C249171%2C474%7C347433%2C474%7C378141%2C1120%7C125070%2C1120%7C129867%2C1120%7C131017%2C1120%7C131531%2C1120%7C167594%2C-8%7C130&quantity=0&ColumnSort=1000011&page=1&nstock=1&pageSize=25)
+
+[Mouser 5V power adapters](https://www.mouser.ch/Power/Power-Supplies/Plug-In-AC-Adapters/Wall-Mount-AC-Adapters/_/N-brwlvZscv7?P=1yxt7bdZ1yxt6e2Z1yxt7aqZ1yxt7adZ1yxt7a4Z1yxt7euZ1yxt794Z1yxt79wZ1yxt6xm)
+
+Note: for whatever reason, Mouser will **not** ship power adapters to retail customers in the EU (and other countries).
+
+[Raspberry Pi universal power supply](https://www.raspberrypi.org/products/raspberry-pi-universal-power-supply/) (comes with interchangeable plugs for all regions).
+
+RS supply similar power adapters with region specific plugs, just go to [RS Components](https://www.rs-online.com/), choose your region (for North American, choose the Allied link rather than the RS link) and search for:
+
+* T6717DV for a US style plug.
+* T6716DV for an EU style plug.
+* T6715DV for a UK style plug.
+
+These are the standard Raspberry Pi power supplies and are available from many other online retailers - just search for the part numbers in Google shopping.
+
+### Misc
+
+* [DANIU 8 piece pliers set](https://www.banggood.com/8Pcs-Round-Beading-Nose-Pliers-Wire-Side-Cutters-Pliers-Tools-Set-p-1042930.html).
+* [Stickers - 28 pieces](https://www.banggood.com/28pcs-Cartoon-Colourful-Reflection-DIY-Laser-Stickers-For-Suitcase-Skateboard-Laptop-Luggage-Sticker-p-1335114.html).
+* [Riden UM34C USB voltage and current meter (with Bluetooth)](https://www.banggood.com/RIDEN-UM34UM34C-For-APP-USB-3_0-Type-C-DC-Voltmeter-Ammeter-Voltage-Current-Meter-Tester-p-1297185.html?ID=514816).

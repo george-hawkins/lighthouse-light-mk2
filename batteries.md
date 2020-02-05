@@ -42,13 +42,15 @@ They're heavily counterfieted, i.e. cheap no-name Chinese cells are repackaged t
 
 Manufacturers generally bundle unprotected cells together into packs and then provide protection and recharging circuitry for the full pack.
 
-When using boards like the Adafruit [Feathers](xxx) the recharging circuitry is provided by the board but you still need a protected cell.
+When using boards like the Adafruit [Feathers](https://www.adafruit.com/category/946) the recharging circuitry is provided by the board but you still need a protected cell.
 
 So while 18650 cells are generally sold unprotected, you can buy them with a tiny [disc shaped protection circuit](https://www.banggood.com/1S-3_7V-18650-Lithium-Battery-Protection-Board-2_5A-Li-ion-BMS-with-Overcharge-and-Over-Discharge-Protection-p-1529056.html) attached to the base.
 
 ---
 
 Spot welding - DIY
+
+[Sunkko 737G 220V spot welding machine](https://www.banggood.com/SUNKKO-737G-220V-Battery-Spot-Welding-Hand-Held-Welding-Machine-with-Pulse-Current-Display-p-1310562.html) - US$110 from Banggood.
 
 Battery holder - protected / unprotected.
 
@@ -58,11 +60,42 @@ While many people do successfully build their own battery packs without apparent
 
 Buying the protection board separately gives you more flexibility - you can use any unprotected cell - but you have to make sure to match the maximum discharge current of the board to the the maximum discharge current supported by the cell.
 
+MakeUseOf has a nice [introductory page](https://www.makeuseof.com/tag/18650-battery/) for 18650 batteries.
+
 ---
 
-Knockoffs of xxx battery holder for *protected* 18650, [with leads](https://www.banggood.com/DIY-1-Slot-18650-Battery-Holder-With-2-Leads-p-972775.html) and [without leads](https://www.banggood.com/DIY-Storage-Box-Holder-Case-For-1-x-18650-Rechargeable-Battery-p-1006063.html).
+Memory Protection Devices (MPD) provide battery holders designed for protected 18650 cells:
 
-[Battery holder](https://www.banggood.com/1-Slots-18650-Battery-Box-Rechargeable-Battery-Holder-Board-for-1x18650-Batteries-DIY-kit-Case-p-1472104.html) for *unprotected* 18650.
+* [BH-18650-PCD](https://www.digikey.com/product-detail/en/mpd-memory-protection-devices/BH-18650-PC/BH-18650-PC-ND/3029216) - battery holder without leads.
+* [BH-18650-W](https://www.digikey.com/product-detail/en/mpd-memory-protection-devices/BH-18650-W/BH-18650-W-ND/3029217) - battery holder with leads.
+* [BK-18650-PC2](https://www.digikey.com/product-detail/en/mpd-memory-protection-devices/BK-18650-PC2/BK-18650-PC2-ND/2079908) - battery holder with tabs to hold battery in-place and without leads.
+
+The above links are to Digikey - these battery holders are available from many other suppliers, e.g. [Reichelt](https://www.reichelt.com/ch/en/Battery-holder-for-other-types-of-batteries/2/index.html?ACTION=2&LA=2&GROUPID=6538&nbc=1) (just select Memory Protection Digikey under the manufacturer filter).
+
+Banggood of MPD battery holder for *protected* 18650, [with leads](https://www.banggood.com/DIY-1-Slot-18650-Battery-Holder-With-2-Leads-p-972775.html) and [without leads](https://www.banggood.com/DIY-Storage-Box-Holder-Case-For-1-x-18650-Rechargeable-Battery-p-1006063.html).
+
+Adafruit [JST PH 2-pin 100mm cable with female connector](https://www.adafruit.com/product/261) or, if you need something longer, their [JST PH extension cable](https://www.adafruit.com/product/1131) (just chop off the unneeded end).
+
+Banggood [Battery holder](https://www.banggood.com/1-Slots-18650-Battery-Box-Rechargeable-Battery-Holder-Board-for-1x18650-Batteries-DIY-kit-Case-p-1472104.html) for *unprotected* 18650.
+
+Banggood [NCR18650B 3.7V 3400mAh protected 18650 battery](https://www.banggood.com/1PCS-NCR-18650B-3_7V-3400mAh-Protected-Rechargeable-Lithium-Battery-p-90678.html).
+
+* AkkuShop Schweiz [NCR18650B 3400mAh protected 18650](https://www.akkushop-schweiz.ch/ch/panasonic-18650-li-ion-akku-mit-3400mah-und-eigener-schutzschaltung-ca.-68-x-18mm-beachten/) - Fr. 30.
+* AkkuShop Schweiz [NCR18650B 2900mAh protected 18650](https://www.akkushop-schweiz.ch/ch/panasonic-ncr18650-pf-2900mah-pcb-geschuetzt/) - Fr. 26.
+* Conrad DE [NCR18650B 3400mah protected 18650](https://www.conrad.de/de/p/panasonic-ncr18650b-spezial-akku-18650-li-ion-3-7-v-3400-mah-1009507.html) - EUR 19 (not listed on condrad.ch).
+
+18650 Battery Store protected 18650 batteries:
+
+* [Panasonic NCR18650B 3400mAh 4.9A](https://www.18650batterystore.com/Protected-p/panasonic-18650-protected.htm) - US$7.
+* [Samsung 35E 18650 3500mAh 8A](https://www.18650batterystore.com/Samsung-18650-p/samsung-35e-protected.htm) - US$7
+* [Sanyo NCR18650GA 3500mAh 10A](https://www.18650batterystore.com/Sanyo-18650-p/ncr18650ga-protected-pcb.htm) - US$8
+* [Samsung 30Q 18650 3000mAh 15A](https://www.18650batterystore.com/Samsung-18650-p/samsung-30q-protected-pcb.htm) - US$9.
+
+Note: in their [battery guide](https://www.18650batterystore.com/Best-18650-Battery-Guide-s/142.htm), the NCR18650B is described as "one of the best batteries on the market". However this page also lists the CDR (Continuous Discharge Rating) for every common 18650 battery and there you can see that the NCR18650B has the lowest CDR value - so if you need more than 5A, you'll need one of the other batteries.
+
+See also [IMR Batteries](https://www.imrbatteries.com/18650-batteries/) for these 18650 batteries.
+
+The easiest available source of protected 18650 batteries for consumers are 18650 batteries intended for use in flashlights, e.g. [Nitecore batteries](https://www.nitecorestore.com/18650-batteries-s/2532.htm). However these tend to be suprisingly expensive (and some of them come with odd feature like a USB port for direct charging).
 
 Aliexpress TZT 1S boards:
 
