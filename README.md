@@ -3,7 +3,7 @@ Lighthouse light mark 2
 
 This project covers a mechanical alternative to my earlier [lighthouse light project](https://github.com/george-hawkins/lighthouse-light).
 
-<img width="512" src="mains-powered-circuit_bb.png">
+<img width="720" src="mains-powered-circuit_bb.png">
 
 The [Fritzing](https://fritzing.org/home/) file for this circuit is [here](mains-powered-circuit.fzz).
 
