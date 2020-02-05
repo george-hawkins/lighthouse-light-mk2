@@ -28,9 +28,9 @@ If you crack open (not recommended) a powerbank you'll find it full of 18650 cel
 
 They come in a standard form factor similar but larger than a classic AA battery. While they have a standard shape there are no end of variations with different [C ratings](https://oscarliang.com/lipo-battery-c-rating/) and different [mAh capacities](https://oscarliang.com/lipo-battery-guide/#capacity).
 
-These cells aren't typically sold directly to consumers and, like all li-ion batteries, their tendency to catch fire is mishandled makes them very unpopular with postal services, e.g. the UK postal service will destroy your whole package if they find it contains lose li-ion cells, i.e. cells that are not built into or attached to an electronic device).
+These cells aren't typically sold directly to consumers and, like all li-ion batteries, their tendency to catch fire is mishandled makes them very unpopular with postal services, e.g. the UK postal service will destroy your whole package if they find it contains loose li-ion cells, i.e. cells that are not built into or attached to an electronic device).
 
-This makes them quite hard to buy. Most sites don't want to deal with the extra postage issues involves and even big electronic component sites like Mouser or Digikey, that carry every conceivable variant of everything else, don't really stock such batteries (they do cell a few as they act as distributors for the cells sold by Adafruit and Sparkfun and a few other hobbyist sites).
+This makes them quite hard to buy. Most sites don't want to deal with the extra postage issues involves and even big electronic component sites like Mouser or Digikey, that carry every conceivable variant of everything else, don't really stock such batteries (they do sell a few as they act as distributors for the cells sold by Adafruit and Sparkfun and a few other hobbyist sites).
 
 ---
 
@@ -67,7 +67,7 @@ Knockoffs of xxx battery holder for *protected* 18650, [with leads](https://www.
 Aliexpress TZT 1S boards:
 
 * [3A](https://www.aliexpress.com/item/32803639402.html)
-* [5A](https://www.aliexpress.com/item/32809288456.html
+* [5A](https://www.aliexpress.com/item/32809288456.html)
 * [7.5A, 10A and 15A](https://www.aliexpress.com/item/32956094047.html) - select 3MOS for 7.5A, 4MOS for 10A and 6MOS for 15A.
 
 Banggood 1S boards:
