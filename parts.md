@@ -27,6 +27,8 @@ A 5V 2A power adapter, similar to this $7.50 [one](https://www.adafruit.com/prod
 
 Similar [2600mAh 18650 battery](https://www.aliexpress.com/item/32822109986.html) from Aliexpress for $3.75.
 
+Note that Mouser and Digikey will not ship li-ion batteries to retail customers in most regions or will apply restrictions (e.g. no air shipping).
+
 ### ESP32 alternatives
 
 * $11 - [Olimex ESP32-DevKit-LiPo](https://www.olimex.com/Products/IoT/ESP32/ESP32-DevKit-LiPo/open-source-hardware).
