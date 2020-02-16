@@ -1,7 +1,7 @@
-Adafruit HUZZAH32 initial setup and installing MicroPython
-==========================================================
+Adafruit HUZZAH32 setup for MicroPython
+=======================================
 
-This page covers setting up an Adafruit HUZZAH32 - first going through the initial steps from Espressif and then through the steps needed to get MicroPython running on it.
+This page covers setting up an [Adafruit HUZZAH32](https://www.adafruit.com/product/3405) for [MicroPython](https://www.micropython.org/). The initial steps involve installing the latest Espressif IoT Development Framework (ESP-IDF) and, once this is done, MicroPython is installed.
 
 
 Basic setup
@@ -19,22 +19,27 @@ Then just work through the Espressif "[Get ESP-IDF](https://docs.espressif.com/p
     $ cd ~/esp
     $ git clone --recurse-submodules -j8 git@github.com:espressif/esp-idf.git
 
-The `esp-idf` pull in many submodules, e.g. [esptool](https://github.com/espressif/esptool), hence the use of `--recurse-submodules`.
+`esp-idf` pulls in many submodules, e.g. [esptool](https://github.com/espressif/esptool), hence the use of `--recurse-submodules`.
 
-Note: Espressif use `--recursive` while I used `--recurse-submodules` introduced in Git 2.13 along with `-j8` which fetches submodules in parallel.
+Note: Espressif use `--recursive` while I used `--recurse-submodules`, introduced in Git 2.13, along with `-j8` which fetches submodules in parallel.
 
+Then after cloning:
+
+    $ cd esp-idf
     $ ./install.sh
 
-This step installed various things under `~/.espressif`.
+This step installs various things under `~/.espressif`.
 
-Update the `PATH` etc.:
+And finally update the `PATH` etc.:
 
     $ source ~/esp/esp-idf/export.sh
+
+This last step needs to be added to your `~/.bashrc` or repeated each time you open a new terminal.
 
 First project
 -------------
 
-Copy the include Hello World project:
+Copy the included Hello World project:
 
     $ echo $IDF_PATH 
     /Users/georgehawkins/esp/esp-idf
@@ -42,30 +47,7 @@ Copy the include Hello World project:
     $ cp -r $IDF_PATH/examples/get-started/hello_world .
     $ cd hello_world
 
-While installing drivers for any kind of board may be the norm on Windows, this is one of the first for which I've had to install a driver on mac OS.
-
-Adafruit have the necessary link to the [SiLabs CP2104 driver page](http://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers) in the "[Using with Arduino IDE](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/using-with-arduino-ide)" section of their guide to the HUZZAH32 board.
-
-Espressif have a page on finding and working with the relevant serial port [here](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/establish-serial-connection.html).
-
-On the Mac it's simple to find (once the necessary driver is installed and the board is connected via USB:
-
-    $ ls /dev/cu.*
-    /dev/cu.SLAB_USBtoUART ...
-
-There's a seemingly identicall `tty` file: 
-
-    $ ls /dev/tty.*
-    /dev/tty.SLAB_USBtoUART ...
-
-However if you use this instead the `idf.py monitor` will later complain:
-
-    --- WARNING: Serial ports accessed as /dev/tty.* will hang gdb if launched.
-    --- Using /dev/cu.SLAB_USBtoUART instead...
-
-Note: the yellow CHG LED on the board flickers incessantly (if no battery is connected). This is apparently normal, see the end of the "[Battery + USB power](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather?view=all#battery-plus-usb-power-4-2)" section of the guide.
-
-You can configure the build setup like so:
+You can now configure the build setup like so:
 
     $ idf.py menuconfig
 
@@ -75,14 +57,35 @@ Now to build everything:
 
     $ idf.py build
 
-This took some time (and involved building 910 object files).
+This takes some time (and involves building 910 object files).
 
-Now to flash the result:
+Once built, the board needs to be plugged in and the serial port, that corresponds to the board, needs to be determined.
+
+But before you connect the board via USB you need to install a driver. This may be the norm for any board when using Window, but this is one of the first for which I've had to do this on mac OS. Adafruit have the necessary link to the [SiLabs CP2104 driver page](http://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers) in the "[Using with Arduino IDE](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/using-with-arduino-ide)" section of their HUZZAH32 guide.
+
+Once the appropriate driver is installed and the board is connected, follow the Espressif [instructions](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/establish-serial-connection.html) on how to determine the board's serial port. On the Mac it's simple:
+
+    $ ls /dev/cu.*
+    /dev/cu.SLAB_USBtoUART ...
+
+There's a seemingly identicall `tty` file: 
+
+    $ ls /dev/tty.*
+    /dev/tty.SLAB_USBtoUART ...
+
+However if you use this the `idf.py monitor` will later complain:
+
+    --- WARNING: Serial ports accessed as /dev/tty.* will hang gdb if launched.
+    --- Using /dev/cu.SLAB_USBtoUART instead...
+
+Note: when connected via USB, the yellow CHG LED on the board flickers incessantly (if no battery is connected). This is apparently normal, see the end of the "[Battery + USB power](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather?view=all#battery-plus-usb-power-4-2)" section of the Adafruit guide.
+
+Now to flash the result of the build process to the board:
 
     $ PORT=/dev/cu.SLAB_USBtoUART
     $ idf.py -p $PORT flash
 
-And interact with the board via the serial port monitor:
+And then interact with the board via the serial port monitor:
 
     $ idf.py -p $PORT monitor
 
@@ -120,7 +123,7 @@ So all it does is print 'Hello world!' and some basic information about the chip
 
 You can exit the monitor with `ctrl-[`.
 
-Let's look at that `W` line above, i.e the warning that it detected more SPI flash that wsa specified in the binary that was uploaded.
+Let's look at that `W` line above, i.e the warning that it detected more SPI flash that was specified in the binary that was uploaded.
 
 Start the menu:
 
@@ -158,16 +161,16 @@ As noted in the Espressif instructions for [updating your setup](https://docs.es
 Installing MicroPython
 ----------------------
 
-As per the MicroPython ESP32 [introduction](https://docs.micropython.org/en/latest/esp32/tutorial/intro.html)...
+The following is just a condensed form of the MicroPython ESP32 [introduction](https://docs.micropython.org/en/latest/esp32/tutorial/intro.html).
 
 Go to the MicroPython [ESP32 firmware downloads](https://micropython.org/download#esp32) and select the GENERIC firmware for ESP-IDF v4.x, i.e. the ESP32 firmware for boards, like the HUZZAH32, that have no external SPI RAM, and which have been setup (as above) with ESP-IDF 4.x.
 
-**Important:** I initially used the GENERIC-SPIRAM firmware, which is intended for boards that 4MB of _external_ pSRAM. The Adafruit [product page](https://www.adafruit.com/product/3405) notes that the board has "4 MB of SPI Flash", however if you read on, it later states "4 MByte flash include [sic] in the WROOM32 module", i.e. it's not external. If you use the GENERIC-SPIRAM, it still works fine but you see these errors in the boot sequence:
+**Important:** I initially used the GENERIC-SPIRAM firmware, which is intended for boards that 4MB of external pSRAM. The Adafruit [product page](https://www.adafruit.com/product/3405) notes that the board has "4 MB of SPI Flash", however pSRAM is something different (as explained [here](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/external-ram.html#hardware)). If you use the GENERIC-SPIRAM, it still works fine but you see these errors in the boot sequence:
 
     E (593) spiram: SPI RAM enabled but initialization failed. Bailing out.
     E (10) spiram: SPI RAM not initialized
 
-I chose the latest non-nightly (nightlies have the same name as the latest stable release with something like `-167-gf020eac6a` tagged on, the `gf020eac6a` doesn't seem to be a Git hash, perhaps it's some CI generated build number).
+I chose the latest non-nightly (nightlies have the same name as the latest stable release but with something like `-167-gf020eac6a` tagged on, the `gf020eac6a` doesn't seem to be a Git hash, perhaps it's some CI generated build number).
 
 Once downloaded, flash it to the board:
 
@@ -195,7 +198,7 @@ Just press return to get a prompt and then:
     sta_if = network.WLAN(network.STA_IF);
     ...
 
-Then press the reset button on the board - you'll see the a boot sequence similar to the one seen above when working with the Hello World example:
+Then press the reset button on the board - you'll see a boot sequence similar to the one seen above when working with the Hello World example:
 
     I (519) cpu_start: Pro cpu up.
     I (519) cpu_start: Application information:
@@ -211,13 +214,23 @@ You can confirm that it's found the 4MB of flash RAM:
     >>> esp.flash_size()
     4194304
 
-And then try turning on the red LED that's next to the USB port and connected to GPIO #13:
+The flash is assigned to a virtual filesystem, while the onboard RAM of the ESP32 is split between heap (managed by the GC) and stack:
+
+    >>> import uos
+    >>> uos.statvfs('/')
+    (4096, 4096, 506, 505, 505, 0, 0, 0, 0, 255)
+    >>> import micropython
+    stack: 736 out of 15360
+    GC: total: 111168, used: 5056, free: 106112
+     No. of 1-blocks: 16, 2-blocks: 9, max blk sz: 264, max free sz: 6428
+
+Once you've had a look around, try turning on the red LED that's next to the USB port and connected to GPIO #13:
 
     >>> import machine
     >>> pin13 = machine.Pin(13, machine.Pin.OUT)
     >>> pin13.value(1)
 
-And then turn it off like so:
+And then turn it off:
 
     >>> pin13.value(0)
 
@@ -234,4 +247,4 @@ You can discover more about the available modules like so:
 
 You can find the documentation for the standard libraries and the MicroPython-specific libraries [here](https://docs.micropython.org/en/latest/library/index.html#python-standard-libraries-and-micro-libraries).
 
-And you can work through the MicroPython introduction to the [ESP8266](https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html) as there's no separate version for the ESP32 and the two are identical for the steps covered here.
+And once you're ready, you can work through the MicroPython introduction to the [ESP8266](https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html) (there's no separate version for the ESP32 and the two are identical for the steps covered here).
