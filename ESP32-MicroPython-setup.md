@@ -259,4 +259,4 @@ Note: a lot of the modules have names like `uos`, `uio` etc., i.e. names that st
 
 You can find the documentation for the standard libraries and the MicroPython-specific libraries [here](https://docs.micropython.org/en/latest/library/index.html#python-standard-libraries-and-micro-libraries).
 
-And once you're ready, you can work through the MicroPython introduction to the [ESP8266](https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html) (there's no separate version for the ESP32 and the two are identical for the steps covered here).
+Once you're ready, you can work through the MicroPython tutorial for the [ESP8266](https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html) (there's no separate version for the ESP32 and the two are identical for things covered here). And after that you can return to the ESP32 specific [quick reference](http://docs.micropython.org/en/latest/esp32/quickref.html).
