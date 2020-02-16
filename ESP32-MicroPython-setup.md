@@ -160,13 +160,18 @@ Installing MicroPython
 
 As per the MicroPython ESP32 [introduction](https://docs.micropython.org/en/latest/esp32/tutorial/intro.html)...
 
-Go to the MicroPython [ESP32 firmware downloads](https://micropython.org/download#esp32) and select the GENERIC-SPIRAM firmware for ESP-IDF v4.x, i.e. the ESP32 firmware for boards, like the HUZZAH32, that have 4MB of SPI RAM, and which have been setup (as above) with ESP-IDF 4.x.
+Go to the MicroPython [ESP32 firmware downloads](https://micropython.org/download#esp32) and select the GENERIC firmware for ESP-IDF v4.x, i.e. the ESP32 firmware for boards, like the HUZZAH32, that have no external SPI RAM, and which have been setup (as above) with ESP-IDF 4.x.
+
+**Important:** I initially used the GENERIC-SPIRAM firmware, which is intended for boards that 4MB of _external_ pSRAM. The Adafruit [product page](https://www.adafruit.com/product/3405) notes that the board has "4 MB of SPI Flash", however if you read on, it later states "4 MByte flash include [sic] in the WROOM32 module", i.e. it's not external. If you use the GENERIC-SPIRAM, it still works fine but you see these errors in the boot sequence:
+
+    E (593) spiram: SPI RAM enabled but initialization failed. Bailing out.
+    E (10) spiram: SPI RAM not initialized
 
 I chose the latest non-nightly (nightlies have the same name as the latest stable release with something like `-167-gf020eac6a` tagged on, the `gf020eac6a` doesn't seem to be a Git hash, perhaps it's some CI generated build number).
 
 Once downloaded, flash it to the board:
 
-    $ FIRMWARE=~/Downloads/esp32spiram-idf4-20191220-v1.12.bin .
+    $ FIRMWARE=~/Downloads/esp32-idf4-20191220-v1.12.bin
     $ esptool.py --port $PORT erase_flash
     $ esptool.py --port $PORT --chip esp32 write_flash -z 0x1000 $FIRMWARE
 
@@ -190,4 +195,43 @@ Just press return to get a prompt and then:
     sta_if = network.WLAN(network.STA_IF);
     ...
 
-You can then work through the MicroPython introduction to the [ESP8266](https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html) as there's no separate version for the ESP32 and the two are identical for the steps covered here.
+Then press the reset button on the board - you'll see the a boot sequence similar to the one seen above when working with the Hello World example:
+
+    I (519) cpu_start: Pro cpu up.
+    I (519) cpu_start: Application information:
+    I (519) cpu_start: Compile time:     Dec 20 2019 07:56:38
+    I (522) cpu_start: ELF file SHA256:  0000000000000000...
+    I (528) cpu_start: ESP-IDF:          v4.0-beta1
+    I (533) cpu_start: Starting app cpu, entry point is 0x40083014
+    I (526) cpu_start: App cpu up.
+
+You can confirm that it's found the 4MB of flash RAM:
+
+    >>> import esp
+    >>> esp.flash_size()
+    4194304
+
+And then try turning on the red LED that's next to the USB port and connected to GPIO #13:
+
+    >>> import machine
+    >>> pin13 = machine.Pin(13, machine.Pin.OUT)
+    >>> pin13.value(1)
+
+And then turn it off like so:
+
+    >>> pin13.value(0)
+
+You can discover more about the available modules like so:
+
+    >>> help("modules")
+    __main__          gc                uctypes           urequests
+    ...
+    framebuf          ucryptolib        ure
+    Plus any modules on the filesystem
+    >>> import machine
+    >>> dir(machine)
+    [... 'DEEPSLEEP', 'DEEPSLEEP_RESET', ..., 'sleep', 'time_pulse_us', 'unique_id', 'wake_reason']
+
+You can find the documentation for the standard libraries and the MicroPython-specific libraries [here](https://docs.micropython.org/en/latest/library/index.html#python-standard-libraries-and-micro-libraries).
+
+And you can work through the MicroPython introduction to the [ESP8266](https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html) as there's no separate version for the ESP32 and the two are identical for the steps covered here.
