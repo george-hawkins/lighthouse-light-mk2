@@ -216,13 +216,23 @@ You can confirm that it's found the 4MB of flash RAM:
 
 The flash is assigned to a virtual filesystem, while the onboard RAM of the ESP32 is split between heap (managed by the GC) and stack:
 
-    >>> import uos
-    >>> uos.statvfs('/')
+    >>> import os
+    >>> os.statvfs('/')
     (4096, 4096, 506, 505, 505, 0, 0, 0, 0, 255)
     >>> import micropython
     stack: 736 out of 15360
     GC: total: 111168, used: 5056, free: 106112
      No. of 1-blocks: 16, 2-blocks: 9, max blk sz: 264, max free sz: 6428
+
+You can take a look at the filesystem like so:
+
+    >>> import os
+    >>> os.listdir('/')
+    ['boot.py']
+    >>> f = open('boot.py')
+    >>> f.read()
+    '# This file is executed on every boot ...'
+    >>> f.close()
 
 Once you've had a look around, try turning on the red LED that's next to the USB port and connected to GPIO #13:
 
@@ -244,6 +254,8 @@ You can discover more about the available modules like so:
     >>> import machine
     >>> dir(machine)
     [... 'DEEPSLEEP', 'DEEPSLEEP_RESET', ..., 'sleep', 'time_pulse_us', 'unique_id', 'wake_reason']
+
+Note: a lot of the modules have names like `uos`, `uio` etc., i.e. names that start with `u`. The `u` indicates a micro version of a standard Python module. You should drop the `u` when importing such modules, e.g. `import os`, i.e. use the standard module name (although it's doesn't do any harm not to). For more, see [this post](https://forum.micropython.org/viewtopic.php?p=40415#p40415) on the MicroPython forums.
 
 You can find the documentation for the standard libraries and the MicroPython-specific libraries [here](https://docs.micropython.org/en/latest/library/index.html#python-standard-libraries-and-micro-libraries).
 
