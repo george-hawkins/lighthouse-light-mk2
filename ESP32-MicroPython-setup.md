@@ -168,7 +168,7 @@ Once downloaded, flash it to the board:
 
     $ FIRMWARE=~/Downloads/esp32spiram-idf4-20191220-v1.12.bin .
     $ esptool.py --port $PORT erase_flash
-    $ esptool.py --chip esp32 --port $PORT write_flash -z 0x1000 esp32spiram-idf4-20191220-v1.12.bin 
+    $ esptool.py --port $PORT --chip esp32 write_flash -z 0x1000 $FIRMWARE
 
 Once uploaded you can connect to the MicroPython REPL:
 
