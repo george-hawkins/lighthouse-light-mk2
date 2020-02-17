@@ -266,13 +266,13 @@ Once you're ready, you can work through the MicroPython tutorial for the [ESP826
 Working with the MicroPython filesystem
 ---------------------------------------
 
-As seen above the filesystem of a newly setup board just contains a single file called `boot.py`. You generally leave this as it is and just upload the main script, that you want the board to run, as `main.py`. If you need any additional modules, beyond the default provided ones, you'll also need to upload them.
+As seen above the filesystem of a newly setup board just contains a single file called `boot.py`. You generally leave this as it is and just upload the main script, that you want the board to run, as `main.py` (for more on this see the Adafruit [guide](https://learn.adafruit.com/micropython-basics-load-files-and-run-code/boot-scripts) to the boot scripts). If you need any additional modules, beyond the default provided ones, you'll also need to upload these.
 
 A little surprisingly there's no standard MicroPython tool for doing this. There are a number of third part tools available - one of the simplest and most popular is [Ampy](https://github.com/scientifichackers/ampy) which I'll use here.
 
 Note: MicroPython doesn't currently support any mechanism to interact with the filesystem other than via the REPL, so under the covers tools like Ampy just interact with the REPL like a human does rather than having a proper API for interacting with the filesystem. This makes things a bit hacky, e.g see issue [#64](https://github.com/scientifichackers/ampy/issues/64).
 
-Before you install anything Python related you should be operating in a Python virtual environment. If you haven't really got Python setup you can do this first like so:
+Before you install anything Python related you should be operating in a Python virtual environment. If you haven't this setup already, you can do it like so:
 
     $ brew install python
     $ python3 -m venv ~/default-env
@@ -281,13 +281,15 @@ Before you install anything Python related you should be operating in a Python v
 
 The `source` step is the only one you need to repeat, if you open a new terminal and need to activate the virtual environment again. Once an environment is activated you can just use commands like `python` and `pip` rather than worrying about using specific versions like `python3` or `pip3`.
 
+Now to install Ampy itself:
+
     $ pip install git+https://github.com/scientifichackers/ampy.git
     $ ampy --help
     Usage: ampy ...
 
-Using the package name `git+https://github.com/scientifichackers/ampy.git` means that you get the latest version available on GitHub. Ampy is under active development but they seem to have stopped makind releases to PyPi in October 2018 (see the PyPi [release history](https://pypi.org/project/adafruit-ampy/#history)).
+Using the package name `git+https://github.com/scientifichackers/ampy.git` means that you get the latest version available on GitHub. Ampy is under active development but they seem to have stopped making releases to PyPi in October 2018 (see the PyPi [release history](https://pypi.org/project/adafruit-ampy/#history)).
 
-Assuming your board is connected and you've still got the `PORT` environment variable set you can start using Ampy
+Assuming your board is connected and you've still got the `PORT` environment variable set you can start using Ampy like so:
 
     $ export AMPY_PORT=$PORT
     $ ampy ls
@@ -296,7 +298,7 @@ Assuming your board is connected and you've still got the `PORT` environment var
     # This file is executed on every boot (including wake-boot from deepsleep)
     ...
 
-Note that `get` just displays the contents of the file, it doesn't copy the file to your machine.
+Note that `get` just displays the contents of the file, it doesn't copy the file to your machine. Now let's upload a script:
 
     $ cat > main.py << EOF
     import machine
@@ -343,4 +345,4 @@ Or just
 
     $ ./pyboard.py --device $PORT -f cp main.py :
 
-For more details see the [`pyboard.py documentation](https://docs.micropython.org/en/latest/reference/pyboard.py.html).
+For more details see the [`pyboard.py` documentation](https://docs.micropython.org/en/latest/reference/pyboard.py.html).
