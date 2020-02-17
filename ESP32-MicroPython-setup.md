@@ -244,6 +244,8 @@ And then turn it off:
 
     >>> pin13.value(0)
 
+TODO: connect an external basic red LED to one of the pins, in series with a resistor that restricts the current to 10mA (it looks like the ESP32 can definitely source at least 12mA per pin and up to 40mA, with certain constraints, but it seems better to stick to a definitely safe value even if it means the LED is a bit dim).
+
 You can discover more about the available modules like so:
 
     >>> help("modules")
@@ -260,3 +262,85 @@ Note: a lot of the modules have names like `uos`, `uio` etc., i.e. names that st
 You can find the documentation for the standard libraries and the MicroPython-specific libraries [here](https://docs.micropython.org/en/latest/library/index.html#python-standard-libraries-and-micro-libraries).
 
 Once you're ready, you can work through the MicroPython tutorial for the [ESP8266](https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html) (there's no separate version for the ESP32 and the two are identical for things covered here). And after that you can return to the ESP32 specific [quick reference](http://docs.micropython.org/en/latest/esp32/quickref.html).
+
+Working with the MicroPython filesystem
+---------------------------------------
+
+As seen above the filesystem of a newly setup board just contains a single file called `boot.py`. You generally leave this as it is and just upload the main script, that you want the board to run, as `main.py`. If you need any additional modules, beyond the default provided ones, you'll also need to upload them.
+
+A little surprisingly there's no standard MicroPython tool for doing this. There are a number of third part tools available - one of the simplest and most popular is [Ampy](https://github.com/scientifichackers/ampy) which I'll use here.
+
+Note: MicroPython doesn't currently support any mechanism to interact with the filesystem other than via the REPL, so under the covers tools like Ampy just interact with the REPL like a human does rather than having a proper API for interacting with the filesystem. This makes things a bit hacky, e.g see issue [#64](https://github.com/scientifichackers/ampy/issues/64).
+
+Before you install anything Python related you should be operating in a Python virtual environment. If you haven't really got Python setup you can do this first like so:
+
+    $ brew install python
+    $ python3 -m venv ~/default-env
+    $ source ~/default-env/bin/activate
+    $ pip install --upgrade pip
+
+The `source` step is the only one you need to repeat, if you open a new terminal and need to activate the virtual environment again. Once an environment is activated you can just use commands like `python` and `pip` rather than worrying about using specific versions like `python3` or `pip3`.
+
+    $ pip install git+https://github.com/scientifichackers/ampy.git
+    $ ampy --help
+    Usage: ampy ...
+
+Using the package name `git+https://github.com/scientifichackers/ampy.git` means that you get the latest version available on GitHub. Ampy is under active development but they seem to have stopped makind releases to PyPi in October 2018 (see the PyPi [release history](https://pypi.org/project/adafruit-ampy/#history)).
+
+Assuming your board is connected and you've still got the `PORT` environment variable set you can start using Ampy
+
+    $ export AMPY_PORT=$PORT
+    $ ampy ls
+    /boot.py
+    $ ampy get /boot.py
+    # This file is executed on every boot (including wake-boot from deepsleep)
+    ...
+
+Note that `get` just displays the contents of the file, it doesn't copy the file to your machine.
+
+    $ cat > main.py << EOF
+    import machine
+    import time
+
+    pin13 = machine.Pin(13, machine.Pin.OUT)
+    on = 1 
+    while True:
+        pin13.value(on)
+        on ^= 1
+        time.sleep(0.2)
+    EOF
+    $ ampy put main.py
+
+Now press the reset button on the board and the script will start running.
+
+Note: if you get the error message `Could not enter raw repl` when using Ampy, you'll have to set `AMPY_DELAY` (see the [configuration section](https://github.com/scientifichackers/ampy#configuration) of the Ampy `README`).
+
+### An alternative
+
+MicroPython do actually provide a tool as well, called [`pyboard.py`](https://docs.micropython.org/en/latest/reference/pyboard.py.html), but you have to do some hand assembly. Assuming you've already got a Python virtual environment setup as above, just do:
+
+    $ curl -O https://raw.githubusercontent.com/micropython/micropython/master/tools/pyboard.py
+    $ chmod a+x pyboard.py 
+    $ pip install pyserial
+
+Now it's setup, you can use it like so:
+
+    $ ./pyboard.py --device $PORT -f ls
+    ls :
+         139 boot.py
+         141 main.py
+    $ ./pyboard.py --device $PORT -f cat :main.py
+    cat :main.py
+    import machine
+    import time
+    ...
+
+Note the `:` before `main.py`, the colon means the remote device rather than the local machine. So you can copy a file to the board like this:
+
+    $ ./pyboard.py --device $PORT -f cp main.py :main.py
+
+Or just
+
+    $ ./pyboard.py --device $PORT -f cp main.py :
+
+For more details see the [`pyboard.py documentation](https://docs.micropython.org/en/latest/reference/pyboard.py.html).
