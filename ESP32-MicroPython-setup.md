@@ -246,6 +246,8 @@ And then turn it off:
 
 TODO: connect an external basic red LED to one of the pins, in series with a resistor that restricts the current to 10mA (it looks like the ESP32 can definitely source at least 12mA per pin and up to 40mA, with certain constraints, but it seems better to stick to a definitely safe value even if it means the LED is a bit dim).
 
+The REPL supports auto-indent which is useful when entering larger pieces of code, however if you're copying and pasting in an already properly indented piece of code, the auto-indent feature will end up over indenting everything. To deal with this you need to use the REPL's [paste mode](http://docs.micropython.org/en/latest/esp8266/tutorial/repl.html#paste-mode) - just press `ctrl-E` to enter paste mode, then paste in the required text and press `ctrl-D` to exit paste mode.
+
 You can discover more about the available modules like so:
 
     >>> help("modules")
@@ -341,7 +343,7 @@ Note the `:` before `main.py`, the colon means the remote device rather than the
 
     $ ./pyboard.py --device $PORT -f cp main.py :main.py
 
-Or just
+Or just:
 
     $ ./pyboard.py --device $PORT -f cp main.py :
 
