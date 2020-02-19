@@ -176,7 +176,9 @@ Once downloaded, flash it to the board:
 
     $ FIRMWARE=~/Downloads/esp32-idf4-20191220-v1.12.bin
     $ esptool.py --port $PORT erase_flash
-    $ esptool.py --port $PORT --chip esp32 write_flash -z 0x1000 $FIRMWARE
+    $ esptool.py --port $PORT write_flash -z 0x1000 $FIRMWARE
+
+Note: many examples includes the the argument `--chip esp32`, however `esptool.py` now automatically detects the chip version.
 
 Once uploaded you can connect to the MicroPython REPL:
 
@@ -277,8 +279,8 @@ Note: MicroPython doesn't currently support any mechanism to interact with the f
 Before you install anything Python related you should be operating in a Python virtual environment. If you haven't this setup already, you can do it like so:
 
     $ brew install python
-    $ python3 -m venv ~/default-env
-    $ source ~/default-env/bin/activate
+    $ python3 -m venv ~/esp-env
+    $ source ~/esp-env/bin/activate
     $ pip install --upgrade pip
 
 The `source` step is the only one you need to repeat, if you open a new terminal and need to activate the virtual environment again. Once an environment is activated you can just use commands like `python` and `pip` rather than worrying about using specific versions like `python3` or `pip3`.
