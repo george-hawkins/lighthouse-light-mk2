@@ -222,9 +222,16 @@ The flash is assigned to a virtual filesystem, while the onboard RAM of the ESP3
     >>> os.statvfs('/')
     (4096, 4096, 506, 505, 505, 0, 0, 0, 0, 255)
     >>> import micropython
+    >>> micropython.mem_info()
     stack: 736 out of 15360
-    GC: total: 111168, used: 5056, free: 106112
-     No. of 1-blocks: 16, 2-blocks: 9, max blk sz: 264, max free sz: 6428
+    GC: total: 111168, used: 104224, free: 6944
+     No. of 1-blocks: 2172, 2-blocks: 381, max blk sz: 264, max free sz: 196
+    >>> import gc
+    >>> gc.collect()
+    >>> micropython.mem_info()
+    stack: 736 out of 15360
+    GC: total: 111168, used: 83200, free: 27968
+     No. of 1-blocks: 1175, 2-blocks: 226, max blk sz: 264, max free sz: 119
 
 You can take a look at the filesystem like so:
 
