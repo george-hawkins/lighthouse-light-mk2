@@ -153,6 +153,23 @@ Now the `W` no longer appears and the Hello World program outputs the correct am
     Hello world!
     This is esp32 chip with 2 CPU cores, WiFi/BT/BLE, silicon revision 1, 4MB external flash
 
+### Linux notes
+
+On Linux, unlike Mac, I did not have to install an SiLabs CP2104 driver. I could immediately access the board via `/dev/ttyUSB0` without any extra configuration.
+
+If you're already a member of the group that can access serial devices, `dialout` on Ubuntu, no additional setup is needed. But if you'd like permissions on the device to be automatically set so that all users can access it and access via a fixed name then you can add this rule to `/etc/udev/rules.d/50-serial-ports.rules`:
+
+    # Silicon Labs Product: CP2104 USB to UART Bridge Controller (used by Adafruit HUZZAH32).
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", \
+        SYMLINK+="cp2104", MODE="0666"
+
+With this rule I can access the board like so:
+
+    $ PORT=/dev/cp2104
+    $ screen $PORT 115200
+
+Note: `screen` behaves differently on Mac and Linux. On Mac quiting requires pressing `ctrl-a` an then `ctrl-\`, while on Linux it requires `ctrl-a` and then just `\`.
+
 Updating ESP-IDF
 ----------------
 
