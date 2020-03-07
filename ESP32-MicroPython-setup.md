@@ -393,7 +393,8 @@ Aside: I have a udev rule that means I know by board is always available via the
 Once installed, you can start `rshell` like so:
 
     $ rshell -p /dev/cp2104
-    Connecting to /dev/cp2104 (buffer-size 512)...
+    Using buffer-size of 32
+    Connecting to /dev/cp2104 (buffer-size 32)...
     Trying to connect to REPL  connected
     Testing if sys.stdin.buffer exists ... Y
     Retrieving root directories ...
@@ -415,6 +416,28 @@ The important thing displayed as part of connecting is the name of your board, h
 As it says, use `ctrl-X` to exit and return to the `rshell` prompt. When you run `repl` for the first time, it seems to actively interrupt any running program, in order to get you to the REPL prompt, but if you exit to the `rshell` prompt then it doesn't do this on subsequent invocations of `repl`.
 
 Tab completion works for filenames in various situations, e.g. when using `ls`, but does not work in others, e.g. when using the `connect` command.
+
+When I start `rshell` using `-p` it connects with a buffer size of 32:
+
+    $ rshell -p /dev/cp2104
+    Using buffer-size of 32
+    Connecting to /dev/cp2104 (buffer-size 32)...
+
+However the `README` for `rshell` says that the default buffer size is 512. If I connect within `rshell` then it does use this buffer size:
+
+    $ rshell
+    > connect serial /dev/cp2104
+    Connecting to /dev/cp2104 (buffer-size 512)...
+
+I don't know why it defaults to a smaller buffer size in the first situation but it makes a huge difference to file transfer speeds. So when using `-p` you should specify the buffer size explicitly:
+
+    $ rshell -p /dev/cp2104 --buffer-size 512
+    Using buffer-size of 512
+    Connecting to /dev/cp2104 (buffer-size 512)...
+    ...
+    > cp my-large-file /pyboard
+
+Letting it use a buffer size of 32 results in file transfer that are 3 times slower for large files. I experimented with other buffer sizes - there's no further gain from increasing the buffer size beyond 512.
 
 If you unplug your board and then reconnect it, `rshell` automatically reconnects. However, I found this didn't work perfectly, e.g. after reconnection I found that pressing `ctrl-C` while in the MicroPython REPL killed `rshell` rather than simply interrupting whatever was running in MicroPython.
 
