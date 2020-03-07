@@ -383,7 +383,14 @@ You can install it like so:
 
     $ pip install rshell
 
-And then start it like so:
+A nice feature of `rshell` is that you can ask it to discover the serial port of your board:
+
+    $ rshell --list
+    USB Serial Device 10c4:ea60 with vendor 'Silicon Labs' serial '01D1884D' found @/dev/ttyUSB0
+
+Aside: I have a udev rule that means I know by board is always available via the soft link `/dev/cp2104`.
+
+Once installed, you can start `rshell` like so:
 
     $ rshell -p /dev/cp2104
     Connecting to /dev/cp2104 (buffer-size 512)...
@@ -394,7 +401,7 @@ And then start it like so:
     Evaluating board_name ... pyboard
     Retrieving time epoch ... Jan 01, 2000 
 
-The import thing displayed as part of connecting is the name of your board, here it's `pyboard`. You have to use this name whenever you want to refer to the board's file system rather than your local filesystem.
+The important thing displayed as part of connecting is the name of your board, here it's `pyboard`. You have to use this name whenever you want to refer to the board's file system rather than your local filesystem.
 
     > ls -l /pyboard
        139 Jan  1 2000  boot.py
@@ -407,14 +414,27 @@ The import thing displayed as part of connecting is the name of your board, here
 
 As it says, use `ctrl-X` to exit and return to the `rshell` prompt. When you run `repl` for the first time, it seems to actively interrupt any running program, in order to get you to the REPL prompt, but if you exit to the `rshell` prompt then it doesn't do this on subsequent invocations of `repl`.
 
-Tab completion works for filenames in various situations, e.g. when using `ls`, but does not work in others, e.g. when using `connect`.
+Tab completion works for filenames in various situations, e.g. when using `ls`, but does not work in others, e.g. when using the `connect` command.
 
-If you disconnect and reconnect your board, it automatically reconnects. However, I found this didn't work perfectly, e.g. after reconnection I found that pressing `ctrl-C` while in the MicroPython REPL killed `rshell` rather than simply interrupting whatever was running in MicroPython.
+If you unplug your board and then reconnect it, `rshell` automatically reconnects. However, I found this didn't work perfectly, e.g. after reconnection I found that pressing `ctrl-C` while in the MicroPython REPL killed `rshell` rather than simply interrupting whatever was running in MicroPython.
 
-For simply doing a hard reset, pressing the reset button on the board works fine. Or in the REPL one can the following:
+For simply doing a hard reset, pressing the reset button on the board works fine. Or in the REPL one can do the following:
 
     > repl
     >>> import machine; machine.reset()
+
+It's nice that `rshell` behaves as if `/pyboard` is a directory of your local filesystem, i.e. it pretends that your board is mounted under this directory. However the disadvantage of not having the concept of a local and remote filesystem is that you end up having to use long-ish path names to refer to your _local_ files if you've changed directory within `rshell` to `/pyboard`:
+
+    > cd /pyboard
+    > ls
+    boot.py
+    > cp ~/my-project/main.py .
+    > ls 
+    boot.py        main.py
+    
+Aside: `rshell` understands that `~` means your home directory but currently tab completion breaks when using `~`.
+
+Note: when you use `ls` wihtout `-l` it doesn't behave quite like normal `ls`, it groups files by type (directories, `.py` files etc.) and sorts the filenames within these groups.
 
 You can also use `rshell` to run a single command and then exit:
 
