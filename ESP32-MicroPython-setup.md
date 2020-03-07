@@ -374,3 +374,172 @@ Or just:
     $ ./pyboard.py --device $PORT -f cp main.py :
 
 For more details see the [`pyboard.py` documentation](https://docs.micropython.org/en/latest/reference/pyboard.py.html).
+
+### Another alternative - rshell
+
+[Rshell](https://github.com/dhylands/rshell) is developed by Dave Hylands. Unlike `ampy` and `pyboard.py` it provides a shell like environment that includes access to the MicroPython REPL. This avoids having to continuously switch between a tool like `screen` to interact with REPL and another tool to upload files to the board.
+
+You can install it like so:
+
+    $ pip install rshell
+
+And then start it like so:
+
+    $ rshell -p /dev/cp2104
+    Connecting to /dev/cp2104 (buffer-size 512)...
+    Trying to connect to REPL  connected
+    Testing if sys.stdin.buffer exists ... Y
+    Retrieving root directories ...
+    Setting time ... Mar 07, 2020 16:22:55
+    Evaluating board_name ... pyboard
+    Retrieving time epoch ... Jan 01, 2000 
+
+The import thing displayed as part of connecting is the name of your board, here it's `pyboard`. You have to use this name whenever you want to refer to the board's file system rather than your local filesystem.
+
+    > ls -l /pyboard
+       139 Jan  1 2000  boot.py
+      5253 Jan  1 2000  main.py
+    > repl
+    Entering REPL. Use Control-X to exit.
+    MicroPython v1.12 on 2019-12-20; ESP32 module with ESP32
+    Type "help()" for more information.
+    >>>
+
+As it says, use `ctrl-X` to exit and return to the `rshell` prompt. When you run `repl` for the first time, it seems to actively interrupt any running program, in order to get you to the REPL prompt, but if you exit to the `rshell` prompt then it doesn't do this on subsequent invocations of `repl`.
+
+Tab completion works for filenames in various situations, e.g. when using `ls`, but does not work in others, e.g. when using `connect`.
+
+If you disconnect and reconnect your board, it automatically reconnects. However, I found this didn't work perfectly, e.g. after reconnection I found that pressing `ctrl-C` while in the MicroPython REPL killed `rshell` rather than simply interrupting whatever was running in MicroPython.
+
+For simply doing a hard reset, pressing the reset button on the board works fine. Or in the REPL one can the following:
+
+    > repl
+    >>> import machine; machine.reset()
+
+You can also use `rshell` to run a single command and then exit:
+
+    $ rshell -p /dev/cp2104 ls /pyboard
+    rshell -p /dev/cp2104 ls /pyboard
+    Using buffer-size of 32
+    ...
+    Retrieving time epoch ... Jan 01, 2000
+    boot.py        main.py
+
+Use `--quiet` if you don't want all the start-up output:
+
+    $ rshell -p /dev/cp2104 --quiet ls /pyboard
+    boot.py        main.py
+
+You can also use this to go straight into the REPL:
+
+    $ rshell -p /dev/cp2104 --quiet repl
+    ...
+    >>>
+
+You can get `rshell` to run things in the REPL and then exit:
+
+    $ rshell -p /dev/cp2104 --quiet repl '~ import sys ~ sys.implementation ~'
+    >>> import sys ; sys.implementation
+    (name='micropython', version=(1, 12, 0), mpy=10757)
+
+Note that you have to use `~` (tilde) instead of `;` to separate statements. The first tilde is not optional but if you leave out the last tilde then `rshell` stays in the REPL rather than exiting and returning to your normal prompt.
+
+You can also include a sequence of `rshell` commands in a script:
+
+    $ cat > myscript << EOF
+    connect serial /dev/cp2104
+    rm -r /pyboard/libs
+    cp -r libs /pyboard
+    EOF
+    $ rshell --quiet -f myscript 
+    ...
+
+Notes:
+
+* Rshell does not save your command history, so if you exit and restart `rshell` you can't just search backwards for what you were doing previously.
+* Rshell development seems to have stopped in mid-2019, Peter Hinch [forked it](https://github.com/peterhinch/rshell) and added a macro feature (similar to `alias` in Bash) but does not seem to be developing it further either.
+
+### Yet another alternative - mpfshell
+
+Currently `pyboard.py`, `ampy`, `rshell` and `mpfshell` seem to be the main tools people are using to interact with MicroPython boards.
+
+So let's install and take a look at the last of these - [`mpfshell`](https://github.com/wendlers/mpfshell):
+
+    $ pip install mpfshell
+
+Note that `mpfshell`, like `ampy` and `rshell`, is currently not being very actively developed.
+
+You have to leave out the `/dev` to connect to particular device:
+
+    $ mpfshell cp2104 
+    Connected to esp32
+
+    ** Micropython File Shell v0.9.1, sw@kaltpost.de ** 
+    -- Running on Python 3.5 using PySerial 3.4 --
+
+    mpfs [/]> help
+
+    Documented commands (type help <topic>):
+    ========================================
+    EOF  cd     exec  get   lcd  lpwd  md    mput  mrm   put   pwd   rm
+    cat  close  exit  help  lls  ls    mget  mpyc  open  putc  repl
+
+It's feature set is very similar to that of `rshell`.
+
+An interesting additional feature is the ability to compile files on the fly and copy the resulting `.mpy` file to your board using `putc`:
+
+    mpfs [/]> putc main.py
+    mpfs [/]> ls
+    Remote files in '/':
+           main.mpy 
+
+This depends on `mpy-cross` being present in your path (see the section on precompiling MicroPython files):
+
+
+Precompiling MicroPython files
+------------------------------
+
+Python is an interpreted language and normally there's no separate compile phase. The same is true when using MicroPython.
+
+MicroPython actually compiles your `.py` files on-the-fly as needed on your board. Normally this works fine but when memory is tight the compiler itself may run out of memory.
+
+You can avoid this by pre-compiling your `.py` files to `.mpy` files and then copying these, rather than the original `.py` files, to your board.
+
+For more about `.mpy` files see the [MicroPython documentation](https://docs.micropython.org/en/latest/reference/mpyfiles.html).
+
+Pre-compiling depends on the MicroPython [`mpy-cross`](https://github.com/micropython/micropython/tree/master/mpy-cross) tool which you can build from source yourself.
+
+An easier alternative is to use the version made available [via PyPi](https://pypi.org/project/mpy-cross/).
+
+Note that this version isn't made available directly by the Micropython GitHub organization. Instead it's built by the [mpy_cross](https://gitlab.com/alelec/mpy_cross) project on GitLab that's maintained by Andrew Leech (who also contributes commits to the main Micropython repo). His project is basically a CI setup that imports Micropython as a submodule (which is updated weeky to point to the latest commit) and creates builds for Windows, Mac and Linux. As such, it's much simpler to use than building from source yourself.
+
+    $ pip install mpy_cross
+    
+For some reason the executable isn't automatically copied/linked to the `bin` directory of your current environment, so find the package location and then the executable:
+
+    $ pip show mpy_cross
+    ...
+    Location: .../env/lib/python3.5/site-packages
+    ...
+    $ ls .../env/lib/python3.5/site-packages/mpy_cross
+    ... mpy-cross
+
+And create the necessary link yourself and use `mpy-cross` like any other command:
+
+    $ ln -s .../env/lib/python3.5/site-packages/mpy_cross/mpy-cross .../env/bin
+    $ mpy-cross --version
+    MicroPython v1.12 on 2019-12-21; mpy-cross emitting mpy v5
+
+Note: make sure to use an absolute path when specifying the source of the soft link.
+
+I've filed issue [#8](https://gitlab.com/alelec/mpy_cross/-/issues/8) to ask why this link isn't done automatically.
+
+Now you can compile files locally and copy them to your board:
+
+    $ mpy-cross main.py 
+    $ ls main.*
+    main.mpy  main.py
+    pyboard.py --device $PORT -f cp main.mpy :
+
+As well as avoiding having to do compilation work on your board, the resulting `.mpy` files are significantly smaller than the original `.py` files.
+
