@@ -388,11 +388,9 @@ A nice feature of `rshell` is that you can ask it to discover the serial port of
     $ rshell --list
     USB Serial Device 10c4:ea60 with vendor 'Silicon Labs' serial '01D1884D' found @/dev/ttyUSB0
 
-Aside: I have a udev rule that means I know by board is always available via the soft link `/dev/cp2104`.
-
 Once installed, you can start `rshell` like so:
 
-    $ rshell -p /dev/cp2104
+    $ rshell -p $PORT
     Using buffer-size of 32
     Connecting to /dev/cp2104 (buffer-size 32)...
     Trying to connect to REPL  connected
@@ -419,7 +417,7 @@ Tab completion works for filenames in various situations, e.g. when using `ls`, 
 
 When I start `rshell` using `-p` it connects with a buffer size of 32:
 
-    $ rshell -p /dev/cp2104
+    $ rshell -p $PORT
     Using buffer-size of 32
     Connecting to /dev/cp2104 (buffer-size 32)...
 
@@ -431,7 +429,7 @@ However the `README` for `rshell` says that the default buffer size is 512. If I
 
 I don't know why it defaults to a smaller buffer size in the first situation but it makes a huge difference to file transfer speeds. So when using `-p` you should specify the buffer size explicitly:
 
-    $ rshell -p /dev/cp2104 --buffer-size 512
+    $ rshell -p $PORT --buffer-size 512
     Using buffer-size of 512
     Connecting to /dev/cp2104 (buffer-size 512)...
     ...
@@ -461,8 +459,7 @@ Note: when you use `ls` wihtout `-l` it doesn't behave quite like normal `ls`, i
 
 You can also use `rshell` to run a single command and then exit:
 
-    $ rshell -p /dev/cp2104 ls /pyboard
-    rshell -p /dev/cp2104 ls /pyboard
+    $ rshell -p $PORT ls /pyboard
     Using buffer-size of 32
     ...
     Retrieving time epoch ... Jan 01, 2000
@@ -470,18 +467,18 @@ You can also use `rshell` to run a single command and then exit:
 
 Use `--quiet` if you don't want all the start-up output:
 
-    $ rshell -p /dev/cp2104 --quiet ls /pyboard
+    $ rshell -p $PORT --quiet ls /pyboard
     boot.py        main.py
 
 You can also use this to go straight into the REPL:
 
-    $ rshell -p /dev/cp2104 --quiet repl
+    $ rshell -p $PORT --quiet repl
     ...
     >>>
 
 You can get `rshell` to run things in the REPL and then exit:
 
-    $ rshell -p /dev/cp2104 --quiet repl '~ import sys ~ sys.implementation ~'
+    $ rshell -p $PORT --quiet repl '~ import sys ~ sys.implementation ~'
     >>> import sys ; sys.implementation
     (name='micropython', version=(1, 12, 0), mpy=10757)
 
@@ -496,6 +493,16 @@ You can also include a sequence of `rshell` commands in a script:
     EOF
     $ rshell --quiet -f myscript 
     ...
+
+Sometimes things got into a state where `rshell` would just hang at startup:
+
+    $ rshell -p $PORT
+    ...
+    Trying to connect to REPL
+
+Oddly the alternative that I've tried here, e.g. `mpfshell` or `pyboard.py`, could still connect when this happened.
+
+The only solution was to disconnect the board and plug it back in - as the other tools could still connect, this seems to be an `rshell` issue rather than a board issue.
 
 Notes:
 

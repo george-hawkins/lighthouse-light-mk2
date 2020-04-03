@@ -133,7 +133,7 @@ Most MCU boards can also be power via USB using a 5V power adapter. The power co
 
 If you get rid of the LiPo battery in the main MOSFET circuit above and use such a 5V power adapter instead then you'll also need different resistors.
 
-Both the Adafruit ["All about LEDs"](https://learn.adafruit.com/all-about-leds?view=all) page and the more specific Sparkfun ["LED current limiting resistors"] page cover what you need to know to calculate the resistor values.
+Both the Adafruit ["All about LEDs"](https://learn.adafruit.com/all-about-leds?view=all) page and the more specific Sparkfun ["LED current limiting resistors"](https://www.sparkfun.com/tutorials/219) page cover what you need to know to calculate the resistor values.
 
 The important thing is the equation _R = (V<sub>s</sub> - V<sub>f</sub>) / i_ where _i_ is forward current, _V<sub>f</sub>_ is forward voltage _V<sub>s</sub>_ is supply voltage and _R_ is the resistance that we're solving for.
 
